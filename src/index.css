@@ -1,0 +1,87 @@
+@import '@fontsource-variable/plus-jakarta-sans';
+@import '@fontsource/vazirmatn/400.css';
+@import '@fontsource/vazirmatn/600.css';
+@import '@fontsource/vazirmatn/800.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --rose: 225 29 116; /* #E11D74 */
+    --rose-soft: 244 114 182; /* #F472B6 */
+    --rose-ink: 190 24 93; /* #BE185D — AA text colour on blush/white */
+    --blush: 255 241 245; /* #FFF1F5 */
+    --blush-deep: 252 231 240; /* #FCE7F0 */
+    --plum: 74 29 63; /* #4A1D3F */
+    --muted: 107 91 103; /* #6B5B67 */
+    --canvas: 255 255 255;
+    --surface: 255 255 255;
+    --line: 74 29 63;
+    color-scheme: light;
+  }
+  .dark {
+    --rose: 225 29 116;
+    --rose-soft: 244 114 182;
+    --rose-ink: 244 114 182;
+    --blush: 42 22 36;
+    --blush-deep: 52 27 45;
+    --plum: 253 232 242;
+    --muted: 209 190 202;
+    --canvas: 30 15 26; /* #1E0F1A */
+    --surface: 44 24 38;
+    --line: 244 114 182;
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    @apply bg-canvas font-sans text-muted antialiased;
+  }
+  [lang='fa'] body,
+  [lang='fa'] {
+    font-family: 'Vazirmatn', system-ui, sans-serif;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply text-plum;
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-rose-ink ring-offset-2 ring-offset-canvas;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200;
+  }
+  .btn-primary {
+    @apply btn bg-rose text-white shadow-soft hover:-translate-y-0.5 hover:brightness-110;
+  }
+  .btn-ghost {
+    @apply btn border border-line/20 bg-surface/60 text-plum backdrop-blur hover:border-rose hover:text-rose-ink;
+  }
+  .card {
+    @apply rounded-2xl border border-line/20 bg-surface/80 p-6 shadow-soft backdrop-blur-sm;
+  }
+  .eyebrow {
+    @apply text-sm font-semibold uppercase tracking-widest text-rose-ink;
+  }
+}

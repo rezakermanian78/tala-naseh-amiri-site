@@ -1,0 +1,140 @@
+import type { Content } from './en'
+
+const todo = (what: string) => `TODO: ${what}`
+
+export const fa: Content = {
+  meta: { name: 'طلا ناصح امیری', monogram: 'T' },
+  nav: {
+    links: [
+      { id: 'about', label: 'درباره من' },
+      { id: 'education', label: 'تحصیلات' },
+      { id: 'skills', label: 'مهارت‌ها' },
+      { id: 'projects', label: 'پروژه‌ها' },
+      { id: 'languages', label: 'زبان‌ها' },
+      { id: 'goals', label: 'اهداف' },
+      { id: 'contact', label: 'تماس' },
+    ],
+    menu: 'منو',
+    toggleTheme: 'تغییر حالت تیره',
+    toggleLang: 'English',
+    toggleLangLabel: 'تغییر زبان به انگلیسی',
+    skip: 'پرش به محتوا',
+  },
+  hero: {
+    greeting: 'سلام، من',
+    name: 'طلا ناصح امیری',
+    nativeName: 'Tala Naseh Amiri',
+    title: 'مهندس برق · پژوهشگر آینده‌دار هوش مصنوعی',
+    tagline:
+      'فارغ‌التحصیل مهندسی برق از دانشگاه تبریز، با نگاهی مبتنی بر مدار و سیگنال به دنیای هوش مصنوعی.',
+    contact: 'تماس با من',
+    cv: 'دانلود رزومه',
+    avatarAlt: 'پرتره طلا ناصح امیری',
+  },
+  about: {
+    eyebrow: 'درباره من',
+    title: 'از مدار تا هوش',
+    paragraphs: [
+      'من فارغ‌التحصیل مهندسی برق از دانشگاه تبریز هستم. آموزش در حوزه مدارها، سیگنال‌ها و سیستم‌ها به من یاد داد دقیق فکر کنم و سازوکار سیستم‌های پیچیده را بفهمم.',
+      'این کنجکاوی اکنون به سمت هوش مصنوعی رفته است: قصد دارم در مقطع کارشناسی ارشد هوش مصنوعی ادامه تحصیل بدهم و پایه‌های مهندسی‌ام را با پژوهش در یادگیری ماشین گسترش دهم.',
+      todo('یک یا دو جمله شخصی درباره مسیر و انگیزه خود اضافه کنید'),
+    ],
+    facts: [
+      { label: 'رشته', value: 'مهندسی برق' },
+      { label: 'دانشگاه', value: 'دانشگاه تبریز' },
+      { label: 'قدم بعدی', value: 'کارشناسی ارشد هوش مصنوعی' },
+    ],
+  },
+  education: {
+    eyebrow: 'تحصیلات',
+    title: 'مسیر تحصیلی',
+    items: [
+      {
+        period: todo('سال شروع – پایان'),
+        degree: 'کارشناسی مهندسی برق',
+        school: 'دانشگاه تبریز',
+        details: todo('گرایش، موضوع پایان‌نامه، افتخارات (اختیاری)'),
+      },
+    ],
+  },
+  skills: {
+    eyebrow: 'مهارت‌ها',
+    title: 'با چه چیزهایی کار می‌کنم',
+    groups: [
+      { name: 'مهندسی', items: [todo('مهارت ۱'), todo('مهارت ۲'), todo('مهارت ۳')] },
+      {
+        name: 'برنامه‌نویسی و هوش مصنوعی',
+        items: [todo('مهارت ۱'), todo('مهارت ۲'), todo('مهارت ۳')],
+      },
+      { name: 'ابزارها', items: [todo('ابزار ۱'), todo('ابزار ۲'), todo('ابزار ۳')] },
+    ],
+  },
+  projects: {
+    eyebrow: 'پروژه‌ها',
+    title: 'منتخب کارها',
+    linkLabel: 'مشاهده پروژه',
+    items: [
+      {
+        title: todo('عنوان پروژه'),
+        description: todo('یک یا دو جمله درباره پروژه'),
+        tags: [todo('برچسب')],
+        href: '',
+      },
+      {
+        title: todo('عنوان پروژه'),
+        description: todo('یک یا دو جمله درباره پروژه'),
+        tags: [todo('برچسب')],
+        href: '',
+      },
+      {
+        title: todo('عنوان پروژه'),
+        description: todo('یک یا دو جمله درباره پروژه'),
+        tags: [todo('برچسب')],
+        href: '',
+      },
+    ],
+  },
+  languages: {
+    eyebrow: 'زبان‌ها',
+    title: 'زبان‌هایی که می‌دانم',
+    levelLabel: 'سطح تسلط (نمونه)',
+    items: [
+      { name: 'فارسی', native: 'Persian', level: 3, levelText: todo('سطح') },
+      { name: 'ترکی استانبولی', native: 'Türkçe', level: 3, levelText: todo('سطح') },
+      { name: 'آذری', native: 'Azərbaycanca', level: 3, levelText: todo('سطح') },
+      { name: 'انگلیسی', native: 'English', level: 3, levelText: todo('سطح') },
+    ],
+  },
+  goals: {
+    eyebrow: 'قدم بعدی',
+    title: 'کارشناسی ارشد هوش مصنوعی',
+    intro:
+      'در حال آماده‌سازی برای ادامه تحصیل در مقطع کارشناسی ارشد هوش مصنوعی هستم تا پیشینه مهندسی برقم را به یادگیری ماشین مدرن پیوند بزنم.',
+    interestsTitle: 'علاقه‌مندی‌ها',
+    interests: [todo('علاقه ۱'), todo('علاقه ۲'), todo('علاقه ۳')],
+    areasTitle: 'حوزه‌های پژوهشی هدف',
+    areas: [todo('حوزه ۱'), todo('حوزه ۲'), todo('حوزه ۳')],
+  },
+  contact: {
+    eyebrow: 'تماس',
+    title: 'در ارتباط باشیم',
+    intro: 'برای همکاری یا پرسش، پیام بفرستید.',
+    channelsTitle: 'من را آنلاین پیدا کنید',
+    email: 'ایمیل',
+    linkedin: 'لینکدین',
+    github: 'گیت‌هاب',
+    instagram: 'اینستاگرام',
+    todoLink: todo('افزودن پیوند'),
+    form: {
+      name: 'نام شما',
+      email: 'ایمیل شما',
+      message: 'پیام',
+      send: 'ارسال پیام',
+      sending: 'در حال ارسال…',
+      success: 'سپاسگزارم! پیام شما ارسال شد.',
+      error: 'مشکلی پیش آمد. لطفاً دوباره تلاش کنید یا مستقیم ایمیل بزنید.',
+      mailtoSubject: 'پیام از وب‌سایت شما',
+    },
+  },
+  footer: { rights: 'تمامی حقوق محفوظ است.', built: 'با دقت ساخته شده.' },
+}
