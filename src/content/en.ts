@@ -17,6 +17,8 @@ export const en = {
     toggleLang: 'فارسی',
     toggleLangLabel: 'Switch to Persian',
     skip: 'Skip to content',
+    skipIntro: 'Skip intro',
+    close: 'Close menu',
   },
   hero: {
     greeting: 'Hello, I am',
@@ -28,6 +30,7 @@ export const en = {
     contact: 'Contact me',
     cv: 'Download CV',
     avatarAlt: 'Portrait of Tala Naseh Amiri',
+    status: 'Open to MSc in AI',
   },
   about: {
     eyebrow: 'About',
@@ -36,6 +39,11 @@ export const en = {
       'I am a graduate of Electrical Engineering from the University of Tabriz. My training in circuits, signals and systems taught me to reason carefully about how complex things work.',
       'That curiosity is now pointing toward Artificial Intelligence: I plan to pursue a Master’s degree in AI and build on my engineering foundations with machine learning research.',
       todo('add one or two personal sentences about your story and motivation'),
+    ],
+    stats: [
+      { value: 4, label: 'Languages spoken' },
+      { value: 13, label: 'Model variants in my paper' },
+      { value: 1, label: 'Paper under review' },
     ],
     facts: [
       { label: 'Field', value: 'Electrical Engineering' },
@@ -129,7 +137,7 @@ export const en = {
       mailtoSubject: 'Message from your website',
     },
   },
-  footer: { rights: 'All rights reserved.', built: 'Built with care.' },
+  footer: { rights: 'All rights reserved.', built: 'Built with care.', top: 'Back to top' },
 }
 
 export type Content = typeof en

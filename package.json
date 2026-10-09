@@ -12,7 +12,6 @@
   },
   "type": "module",
   "dependencies": {
-    "@fontsource-variable/plus-jakarta-sans": "^5.3.0",
     "@fontsource/vazirmatn": "^5.3.0",
     "framer-motion": "^14.0.0",
     "i18next": "^26.4.2",
