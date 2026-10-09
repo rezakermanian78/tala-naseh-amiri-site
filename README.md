@@ -32,7 +32,7 @@ Put the file at `public/cv.pdf`. The "Download CV" button already points to `/cv
 
 ## SEO / domain
 
-Replace `https://example.com` in `index.html` (canonical, Open Graph, JSON-LD), `public/sitemap.xml`, `public/robots.txt` and `src/content/site.ts`. `og:image` points at `/avatar.jpg`; swap in a dedicated 1200×630 `public/og-image.png` if you prefer.
+Replace `https://tala-naseh-amiri-site.vercel.app` in `index.html` (canonical, Open Graph, JSON-LD), `public/sitemap.xml`, `public/robots.txt` and `src/content/site.ts`. `og:image` points at `/avatar.jpg`; swap in a dedicated 1200×630 `public/og-image.png` if you prefer.
 
 ## Deploy to Vercel
 
