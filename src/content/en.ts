@@ -68,23 +68,21 @@ export const en = {
     eyebrow: 'Projects',
     title: 'Selected work',
     linkLabel: 'View project',
+    coauthorsLabel: 'Co-authors',
     items: [
       {
-        title: todo('project title'),
-        description: todo('one or two sentences about the project'),
-        tags: [todo('tag')],
-        href: '',
-      },
-      {
-        title: todo('project title'),
-        description: todo('one or two sentences about the project'),
-        tags: [todo('tag')],
-        href: '',
-      },
-      {
-        title: todo('project title'),
-        description: todo('one or two sentences about the project'),
-        tags: [todo('tag')],
+        title:
+          'When most ideas fail: pre-registered kill-tests, walk-forward discipline, and honest failure reporting in machine-learning trading system development: evidence from intraday gold (XAU/USD)',
+        badge: 'Research paper · Under review (2026)',
+        coauthors: 'Reza Kermanian, Tala Naseh Amiri',
+        description:
+          'A pre-registered, walk-forward study of 13 machine-learning model variants on 5-minute XAU/USD data (2023-2026). Nine variants failed their own criteria and two edges survived, with every failure reported openly, including a 2026 out-of-time degradation.',
+        tags: [
+          'Machine Learning',
+          'Algorithmic Trading',
+          'Walk-Forward Validation',
+          'Reproducibility',
+        ],
         href: '',
       },
     ],
@@ -92,12 +90,12 @@ export const en = {
   languages: {
     eyebrow: 'Languages',
     title: 'Languages I speak',
-    levelLabel: 'Proficiency (placeholder)',
+    levelLabel: 'Proficiency',
     items: [
-      { name: 'Persian', native: 'فارسی', level: 3, levelText: todo('level') },
-      { name: 'Turkish', native: 'Türkçe', level: 3, levelText: todo('level') },
-      { name: 'Azeri', native: 'Azərbaycanca', level: 3, levelText: todo('level') },
-      { name: 'English', native: 'English', level: 3, levelText: todo('level') },
+      { name: 'Persian', native: 'فارسی', level: 5, levelText: 'Native' },
+      { name: 'Turkish', native: 'Türkçe', level: 5, levelText: 'Excellent' },
+      { name: 'Azeri', native: 'Azərbaycanca', level: 5, levelText: 'Excellent' },
+      { name: 'English', native: 'English', level: 5, levelText: 'Excellent' },
     ],
   },
   goals: {

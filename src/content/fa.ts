@@ -73,23 +73,16 @@ export const fa: Content = {
     eyebrow: 'پروژه‌ها',
     title: 'منتخب کارها',
     linkLabel: 'مشاهده پروژه',
+    coauthorsLabel: 'نویسندگان',
     items: [
       {
-        title: todo('عنوان پروژه'),
-        description: todo('یک یا دو جمله درباره پروژه'),
-        tags: [todo('برچسب')],
-        href: '',
-      },
-      {
-        title: todo('عنوان پروژه'),
-        description: todo('یک یا دو جمله درباره پروژه'),
-        tags: [todo('برچسب')],
-        href: '',
-      },
-      {
-        title: todo('عنوان پروژه'),
-        description: todo('یک یا دو جمله درباره پروژه'),
-        tags: [todo('برچسب')],
+        title:
+          'وقتی بیشتر ایده‌ها شکست می‌خورند: کل‌آزمون‌های پیش‌ثبت‌شده، انضباط اعتبارسنجی گام‌به‌گام و گزارش صادقانه شکست‌ها در توسعه سامانه‌های معاملاتی مبتنی بر یادگیری ماشین: شواهدی از طلای درون‌روزی (XAU/USD)',
+        badge: 'مقاله پژوهشی · در حال داوری (۲۰۲۶)',
+        coauthors: 'رضا کرمانیان، طلا ناصح امیری',
+        description:
+          'یک مطالعه پیش‌ثبت‌شده و گام‌به‌گام (walk-forward) روی ۱۳ نوع مدل یادگیری ماشین با داده‌های ۵ دقیقه‌ای XAU/USD (۲۰۲۳ تا ۲۰۲۶). نُه مدل معیارهای خودشان را برآورده نکردند و دو مزیت پایدار ماند؛ همه شکست‌ها آشکارا گزارش شده‌اند، از جمله افت عملکرد خارج از زمان در سال ۲۰۲۶.',
+        tags: ['یادگیری ماشین', 'معاملات الگوریتمی', 'اعتبارسنجی Walk-Forward', 'بازتولیدپذیری'],
         href: '',
       },
     ],
@@ -97,12 +90,12 @@ export const fa: Content = {
   languages: {
     eyebrow: 'زبان‌ها',
     title: 'زبان‌هایی که می‌دانم',
-    levelLabel: 'سطح تسلط (نمونه)',
+    levelLabel: 'سطح تسلط',
     items: [
-      { name: 'فارسی', native: 'Persian', level: 3, levelText: todo('سطح') },
-      { name: 'ترکی استانبولی', native: 'Türkçe', level: 3, levelText: todo('سطح') },
-      { name: 'آذری', native: 'Azərbaycanca', level: 3, levelText: todo('سطح') },
-      { name: 'انگلیسی', native: 'English', level: 3, levelText: todo('سطح') },
+      { name: 'فارسی', native: 'Persian', level: 5, levelText: 'زبان مادری' },
+      { name: 'ترکی استانبولی', native: 'Türkçe', level: 5, levelText: 'عالی' },
+      { name: 'آذری', native: 'Azərbaycanca', level: 5, levelText: 'عالی' },
+      { name: 'انگلیسی', native: 'English', level: 5, levelText: 'عالی' },
     ],
   },
   goals: {
