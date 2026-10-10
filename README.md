@@ -16,7 +16,7 @@ npm run format
 
 - `src/content/en.ts` — all English copy. Every `TODO: ...` string is a placeholder to replace.
 - `src/content/fa.ts` — Persian copy (must match the shape of `en.ts`; TypeScript will tell you if not).
-- `src/content/site.ts` — email, LinkedIn/GitHub/Instagram URLs, CV path, domain. Empty values show a "TODO" in the UI.
+- `src/content/site.ts` — email (`talanasehamiri@gmail.com`), LinkedIn/GitHub/Instagram URLs, CV path, domain. Empty values show a "TODO" in the UI.
 - Projects: set `href` on each item in `projects.items` to show its link.
 - Language levels: edit `level` (0–5) and `levelText` in `languages.items`.
 - Avatar: `public/avatar.jpg` + `avatar.webp` (used in `src/components/Hero.tsx`).
@@ -32,7 +32,7 @@ Put the file at `public/cv.pdf`. The "Download CV" button already points to `/cv
 
 ## SEO / domain
 
-Replace `https://tala-naseh-amiri-site.vercel.app` in `index.html` (canonical, Open Graph, JSON-LD), `public/sitemap.xml`, `public/robots.txt` and `src/content/site.ts`. `og:image` points at `/avatar.jpg`; swap in a dedicated 1200×630 `public/og-image.png` if you prefer.
+Replace `https://tala-naseh-amiri-site.vercel.app` in `index.html` (canonical, Open Graph, JSON-LD; the JSON-LD Person also carries the contact email), `public/sitemap.xml`, `public/robots.txt` and `src/content/site.ts`. `og:image` points at `/avatar.jpg`; swap in a dedicated 1200×630 `public/og-image.png` if you prefer.
 
 ## Deploy to Vercel
 
