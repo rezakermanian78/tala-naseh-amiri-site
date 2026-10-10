@@ -26,7 +26,7 @@ export const en = {
     nativeName: 'طلا ناصح امیری',
     title: 'Electrical Engineer · Aspiring AI Researcher',
     tagline:
-      'Electrical engineering graduate from the University of Tabriz, bringing a circuits-and-signals mindset to the world of artificial intelligence.',
+      'Electrical engineering graduate (Power Systems) from the University of Tabriz, bringing a power-engineering mindset to artificial intelligence — from load forecasting to smart grid optimization.',
     contact: 'Contact me',
     cv: 'Download CV',
     avatarAlt: 'Portrait of Tala Naseh Amiri',
@@ -34,19 +34,19 @@ export const en = {
   },
   about: {
     eyebrow: 'About',
-    title: 'From circuits to intelligence',
+    title: 'From power systems to intelligence',
     paragraphs: [
-      'I am a graduate of Electrical Engineering from the University of Tabriz. My training in circuits, signals and systems taught me to reason carefully about how complex things work.',
-      'That curiosity is now pointing toward Artificial Intelligence: I plan to pursue a Master’s degree in AI and build on my engineering foundations with machine learning research.',
+      'I am a graduate of Electrical Engineering from the University of Tabriz, specializing in Power Systems. My training in power systems and electrical machines taught me to reason carefully about how complex, interconnected systems work.',
+      'That curiosity is now pointing toward Artificial Intelligence: I plan to pursue a Master’s degree in AI and bring machine learning to power systems — for example load forecasting, fault detection and smart grid optimization.',
       todo('add one or two personal sentences about your story and motivation'),
     ],
     stats: [
-      { value: 4, label: 'Languages spoken' },
+      { value: 5, label: 'Languages spoken' },
       { value: 13, label: 'Model variants in my paper' },
       { value: 1, label: 'Paper under review' },
     ],
     facts: [
-      { label: 'Field', value: 'Electrical Engineering' },
+      { label: 'Field', value: 'Electrical Engineering (Power Systems)' },
       { label: 'University', value: 'University of Tabriz' },
       { label: 'Next step', value: 'Master’s in Artificial Intelligence' },
     ],
@@ -59,7 +59,7 @@ export const en = {
         period: todo('start – end year'),
         degree: 'B.Sc. in Electrical Engineering',
         school: 'University of Tabriz',
-        details: todo('specialisation, thesis topic, honours (optional)'),
+        details: 'Electrical Engineering, specialization: Power Systems',
       },
     ],
   },
@@ -70,10 +70,13 @@ export const en = {
       {
         name: 'Engineering',
         items: [
-          'Electrical Engineering',
-          'Power Systems',
-          'Control Systems',
-          'Signal Processing',
+          'Power Systems Analysis',
+          'Electrical Machines',
+          'Power System Protection',
+          'Power Electronics',
+          'Smart Grids',
+          'Renewable Energy',
+          'High-Voltage Engineering',
           'MATLAB / Simulink',
         ],
       },
@@ -132,7 +135,7 @@ export const en = {
     eyebrow: 'Next step',
     title: 'Master’s in Artificial Intelligence',
     intro:
-      'I am preparing to continue my studies with a Master’s degree in AI, connecting my electrical engineering background to modern machine learning.',
+      'I am preparing to continue my studies with a Master’s degree in AI, moving from Electrical Engineering (Power Systems) into AI — applying modern machine learning to power systems, such as load forecasting, fault detection and smart grid optimization.',
     areasTitle: 'Research interests',
     areas: [
       'Large Language Models in Healthcare',
@@ -140,7 +143,7 @@ export const en = {
       'AI-Driven Compiler Optimization',
       'Fog/Edge Computing Resource Allocation',
       'Machine Learning for Algorithmic Trading',
-      'AI for Electrical & Energy Systems',
+      'AI for Power Systems & Smart Grids',
     ],
   },
   contact: {
