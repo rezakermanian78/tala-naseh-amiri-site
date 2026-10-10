@@ -12,7 +12,7 @@ export default function Languages() {
     <Section id="languages" eyebrow={languages.eyebrow} title={languages.title}>
       <ul className="grid gap-6 sm:grid-cols-2">
         {languages.items.map((l, i) => (
-          <li key={l.name}>
+          <li key={l.name} className="sm:[&:last-child:nth-child(odd)]:col-span-2">
             <Card delay={i * 0.08}>
               <div className="flex items-baseline justify-between gap-3">
                 <h3 className="text-xl font-bold">{l.name}</h3>

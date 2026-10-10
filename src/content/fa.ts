@@ -122,6 +122,7 @@ export const fa: Content = {
       { name: 'ترکی استانبولی', native: 'Türkçe', level: 5, levelText: 'عالی' },
       { name: 'آذری', native: 'Azərbaycanca', level: 5, levelText: 'عالی' },
       { name: 'انگلیسی', native: 'English', level: 5, levelText: 'عالی' },
+      { name: 'آلمانی', native: 'Deutsch', level: 3, levelText: 'متوسط' },
     ],
   },
   goals: {

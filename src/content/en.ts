@@ -125,6 +125,7 @@ export const en = {
       { name: 'Turkish', native: 'Türkçe', level: 5, levelText: 'Excellent' },
       { name: 'Azeri', native: 'Azərbaycanca', level: 5, levelText: 'Excellent' },
       { name: 'English', native: 'English', level: 5, levelText: 'Excellent' },
+      { name: 'German', native: 'Deutsch', level: 3, levelText: 'Intermediate' },
     ],
   },
   goals: {
