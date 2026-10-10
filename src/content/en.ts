@@ -67,9 +67,30 @@ export const en = {
     eyebrow: 'Skills',
     title: 'What I work with',
     groups: [
-      { name: 'Engineering', items: [todo('skill 1'), todo('skill 2'), todo('skill 3')] },
-      { name: 'Programming & AI', items: [todo('skill 1'), todo('skill 2'), todo('skill 3')] },
-      { name: 'Tools', items: [todo('tool 1'), todo('tool 2'), todo('tool 3')] },
+      {
+        name: 'Engineering',
+        items: [
+          'Electrical Engineering',
+          'Power Systems',
+          'Control Systems',
+          'Signal Processing',
+          'MATLAB / Simulink',
+        ],
+      },
+      {
+        name: 'Programming & AI',
+        items: [
+          'Python',
+          'Machine Learning',
+          'Deep Learning',
+          'LLMs & RAG',
+          'Explainable AI (XAI)',
+          'Data Analysis',
+          'FastAPI',
+          'React',
+        ],
+      },
+      { name: 'Tools', items: ['Git & GitHub', 'Jupyter', 'LaTeX', 'Linux', 'Docker'] },
     ],
   },
   projects: {
@@ -111,10 +132,15 @@ export const en = {
     title: 'Master’s in Artificial Intelligence',
     intro:
       'I am preparing to continue my studies with a Master’s degree in AI, connecting my electrical engineering background to modern machine learning.',
-    interestsTitle: 'Interests',
-    interests: [todo('interest 1'), todo('interest 2'), todo('interest 3')],
-    areasTitle: 'Target research areas',
-    areas: [todo('research area 1'), todo('research area 2'), todo('research area 3')],
+    areasTitle: 'Research interests',
+    areas: [
+      'Large Language Models in Healthcare',
+      'Explainable AI for Intrusion Detection',
+      'AI-Driven Compiler Optimization',
+      'Fog/Edge Computing Resource Allocation',
+      'Machine Learning for Algorithmic Trading',
+      'AI for Electrical & Energy Systems',
+    ],
   },
   contact: {
     eyebrow: 'Contact',

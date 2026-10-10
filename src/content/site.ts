@@ -5,7 +5,7 @@ export const site = {
   email: 'talanasehamiri@gmail.com',
   formspreeId: import.meta.env.VITE_FORMSPREE_ID ?? '',
   socials: {
-    linkedin: '', // TODO: full LinkedIn profile URL
+    linkedin: 'https://www.linkedin.com/in/tala-naseh-amiri-513a54318/',
     github: '', // TODO: full GitHub profile URL
     instagram: '', // TODO: full Instagram profile URL
   },

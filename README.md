@@ -16,7 +16,7 @@ npm run format
 
 - `src/content/en.ts` — all English copy. Every `TODO: ...` string is a placeholder to replace.
 - `src/content/fa.ts` — Persian copy (must match the shape of `en.ts`; TypeScript will tell you if not).
-- `src/content/site.ts` — email (`talanasehamiri@gmail.com`), LinkedIn/GitHub/Instagram URLs, CV path, domain. Empty values show a "TODO" in the UI.
+- `src/content/site.ts` — email (`talanasehamiri@gmail.com`), LinkedIn/GitHub/Instagram URLs, CV path, domain. Empty values show a "TODO" in the UI. LinkedIn is set to `https://www.linkedin.com/in/tala-naseh-amiri-513a54318/` (also in the JSON-LD `sameAs` in `index.html`).
 - Projects: set `href` on each item in `projects.items` to show its link.
 - Language levels: edit `level` (0–5) and `levelText` in `languages.items`.
 - Avatar: `public/avatar.jpg` + `avatar.webp` (used in `src/components/Hero.tsx`).
