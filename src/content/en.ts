@@ -78,6 +78,7 @@ export const en = {
           'Renewable Energy',
           'High-Voltage Engineering',
           'MATLAB / Simulink',
+          'AutoCAD',
         ],
       },
       {

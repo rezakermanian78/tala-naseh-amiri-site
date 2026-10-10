@@ -80,6 +80,7 @@ export const fa: Content = {
           'انرژی‌های تجدیدپذیر',
           'مهندسی فشار قوی',
           'MATLAB / Simulink',
+          'اتوکد',
         ],
       },
       {
