@@ -10,6 +10,7 @@ import { useContent } from './hooks/useContent'
 const Education = lazy(() => import('./components/Education'))
 const Skills = lazy(() => import('./components/Skills'))
 const Projects = lazy(() => import('./components/Projects'))
+const ContentCreation = lazy(() => import('./components/ContentCreation'))
 const Languages = lazy(() => import('./components/Languages'))
 const Goals = lazy(() => import('./components/Goals'))
 const Contact = lazy(() => import('./components/Contact'))
@@ -36,6 +37,7 @@ export default function App() {
             <Education />
             <Skills />
             <Projects />
+            <ContentCreation />
             <Languages />
             <Goals />
             <Contact />

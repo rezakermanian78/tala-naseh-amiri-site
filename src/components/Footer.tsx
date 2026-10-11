@@ -1,4 +1,5 @@
-import { ArrowUp } from 'lucide-react'
+import { ArrowUp, Camera } from 'lucide-react'
+import { site } from '../content/site'
 import { useContent } from '../hooks/useContent'
 
 export default function Footer() {
@@ -17,6 +18,17 @@ export default function Footer() {
           </p>
           <p>{content.footer.built}</p>
         </div>
+        {site.socials.instagram && (
+          <a
+            href={site.socials.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-ghost"
+          >
+            <Camera size={18} aria-hidden="true" />
+            Instagram
+          </a>
+        )}
         <a href="#top" className="btn-ghost group">
           <ArrowUp
             size={18}

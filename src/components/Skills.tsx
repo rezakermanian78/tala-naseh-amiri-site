@@ -7,7 +7,7 @@ export default function Skills() {
   const { skills } = useContent().content
   return (
     <Section id="skills" eyebrow={skills.eyebrow} title={skills.title}>
-      <div className="grid gap-6 md:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-2">
         {skills.groups.map((g, gi) => (
           <Card key={g.name} delay={gi * 0.1}>
             <h3 className="text-xl font-bold">{g.name}</h3>

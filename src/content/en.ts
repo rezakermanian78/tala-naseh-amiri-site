@@ -8,6 +8,7 @@ export const en = {
       { id: 'education', label: 'Education' },
       { id: 'skills', label: 'Skills' },
       { id: 'projects', label: 'Projects' },
+      { id: 'content', label: 'Content' },
       { id: 'languages', label: 'Languages' },
       { id: 'goals', label: 'Goals' },
       { id: 'contact', label: 'Contact' },
@@ -38,6 +39,7 @@ export const en = {
     paragraphs: [
       'I am a graduate of Electrical Engineering from the University of Tabriz, specializing in Power Systems. My training in power systems and electrical machines taught me to reason carefully about how complex, interconnected systems work.',
       'That curiosity is now pointing toward Artificial Intelligence: I plan to pursue a Master’s degree in AI and bring machine learning to power systems — for example load forecasting, fault detection and smart grid optimization.',
+      'Alongside engineering, I am a professional Instagram content creator. I bring the same storytelling and communication skills to technical topics, making complex ideas clear and engaging.',
       todo('add one or two personal sentences about your story and motivation'),
     ],
     stats: [
@@ -94,6 +96,17 @@ export const en = {
           'React',
         ],
       },
+      {
+        name: 'Content & Creative',
+        items: [
+          'Instagram Content Creation',
+          'Reels & Short-Form Video',
+          'Content Strategy',
+          'Visual Storytelling',
+          'Video Editing',
+          'Social Media Branding',
+        ],
+      },
       { name: 'Tools', items: ['Git & GitHub', 'Jupyter', 'LaTeX', 'Linux', 'Docker'] },
     ],
   },
@@ -119,6 +132,30 @@ export const en = {
         href: '',
       },
     ],
+  },
+  contentCreation: {
+    eyebrow: 'Content Creation',
+    title: 'Stories for the screen',
+    intro:
+      'Alongside my engineering path, I work as a professional Instagram content creator. I use storytelling, visuals and short-form video to make ideas easier to understand and share.',
+    cards: [
+      {
+        title: 'Instagram Content',
+        description:
+          'Planning and publishing posts with a consistent visual style and a clear voice.',
+      },
+      {
+        title: 'Reels & Short Video',
+        description: 'Shooting and editing short-form video that tells a story in a few seconds.',
+      },
+      {
+        title: 'Creative Direction',
+        description:
+          'Shaping the concept, look and tone of a page so every piece feels part of one brand.',
+      },
+    ],
+    follow: 'Follow on Instagram',
+    featuredTitle: 'Featured work',
   },
   languages: {
     eyebrow: 'Languages',
