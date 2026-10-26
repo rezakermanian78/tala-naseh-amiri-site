@@ -1,5 +1,4 @@
-// Hand-written to match supabase/migrations/0001_init.sql. Keep the two in sync.
-// (Equivalent to the output of `supabase gen types typescript`.)
+// Row shapes returned by the API (server/src/db/schema.ts). Keep the two in sync.
 
 type Timestamps = { created_at: string; updated_at: string }
 type ListMeta = { id: string; sort_order: number; visible: boolean } & Timestamps
@@ -113,17 +112,10 @@ export type MessageRow = {
   email: string
   message: string
   read: boolean
-  ip_hash: string | null
   created_at: string
 }
 
 type Generated = 'id' | 'created_at' | 'updated_at'
-type Table<Row, Insert = Partial<Row>> = {
-  Row: Row
-  Insert: Insert
-  Update: Partial<Row>
-  Relationships: []
-}
 
 export type ListRows = {
   skills: SkillRow
@@ -137,23 +129,3 @@ export type ListRows = {
 export type ListTable = keyof ListRows
 /** A list row without the columns the database fills in. */
 export type Draft<T extends ListTable> = Omit<ListRows[T], Generated>
-
-export type Database = {
-  public: {
-    Tables: {
-      site_settings: Table<SiteSettingsRow>
-      skills: Table<SkillRow>
-      languages: Table<LanguageRow>
-      education: Table<EducationRow>
-      projects: Table<ProjectRow>
-      publications: Table<PublicationRow>
-      content_work: Table<ContentWorkRow>
-      gallery: Table<GalleryRow>
-      messages: Table<MessageRow, Pick<MessageRow, 'name' | 'email' | 'message'>>
-    }
-    Views: Record<never, never>
-    Functions: { is_admin: { Args: Record<never, never>; Returns: boolean } }
-    Enums: Record<never, never>
-    CompositeTypes: Record<never, never>
-  }
-}

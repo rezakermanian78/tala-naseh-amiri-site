@@ -3,7 +3,7 @@ import { useRef, useState, type FormEvent } from 'react'
 import * as z from 'zod/mini'
 import { useContent } from '../hooks/useContent'
 import { useSiteContent } from '../hooks/useSiteContent'
-import { getPublicDb, supabaseConfigured } from '../lib/supabase'
+import { api, ApiError, apiConfigured } from '../lib/api'
 import Card from './Card'
 import Magnetic from './Magnetic'
 import Reveal from './Reveal'
@@ -97,7 +97,7 @@ export default function Contact() {
       return
     }
 
-    if (!supabaseConfigured) {
+    if (!apiConfigured) {
       const { name, email, message } = parsed.data
       const body = `${message}\n\n— ${name} (${email})`
       window.location.href = `mailto:${profile.email}?subject=${encodeURIComponent(contact.form.mailtoSubject)}&body=${encodeURIComponent(body)}`
@@ -111,17 +111,12 @@ export default function Contact() {
 
     setStatus('sending')
     try {
-      const db = await getPublicDb()
-      const { error } = await db.from('messages').insert(parsed.data)
-      if (error) {
-        setStatus(error.message.includes('rate_limited') ? 'rateLimited' : 'error')
-        return
-      }
+      await api('/api/messages', { method: 'POST', body: { ...parsed.data, website: '' } })
       rememberSend()
       form.reset()
       setStatus('success')
-    } catch {
-      setStatus('error')
+    } catch (err) {
+      setStatus(err instanceof ApiError && err.code === 'rate_limited' ? 'rateLimited' : 'error')
     }
   }
 

@@ -1,4 +1,4 @@
-// Interface labels + the FALLBACK content. Once Supabase is set up, the editable content
+// Interface labels + the FALLBACK content. Once the API is set up, the editable content
 // (profile, skills, education, projects, …) comes from the database and is edited at /admin;
 // see src/content/fallback.ts for which fields map where.
 const todo = (what: string) => `TODO: ${what}`

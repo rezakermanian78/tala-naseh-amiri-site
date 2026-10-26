@@ -1,4 +1,4 @@
-// Port of the original supabase/migrations/0001_init.sql. Property names match the column
+// Same tables/columns as the original Supabase migration (removed). Property names match the column
 // names (snake_case) so the JSON the API returns is exactly what the frontend already expects.
 import { sql } from 'drizzle-orm'
 import {

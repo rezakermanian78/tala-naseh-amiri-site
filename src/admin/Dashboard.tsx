@@ -1,4 +1,4 @@
-import { ExternalLink, Languages, LogOut, Moon, Sun } from 'lucide-react'
+import { ExternalLink, KeyRound, Languages, LogOut, Moon, Sun } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from 'react'
 import { useTheme } from '../hooks/useTheme'
 import { countUnread } from './api'
@@ -16,6 +16,7 @@ import {
 } from './tabs/ListTabs'
 import MessagesTab from './tabs/MessagesTab'
 import ProfileTab from './tabs/ProfileTab'
+import ChangePassword from './ui/ChangePassword'
 
 const TABS = [
   'profile',
@@ -52,6 +53,7 @@ export default function Dashboard({
   const { dark, toggle } = useTheme()
   const [tab, setTab] = useState<Tab>(initialTab)
   const [unread, setUnread] = useState(0)
+  const [passwordOpen, setPasswordOpen] = useState(false)
   const tabRefs = useRef<Partial<Record<Tab, HTMLButtonElement | null>>>({})
 
   useEffect(() => {
@@ -122,6 +124,15 @@ export default function Dashboard({
           <button type="button" onClick={onToggleLang} aria-label={t.langToggleLabel} className={headerBtn}>
             <Languages size={16} aria-hidden="true" />
             {t.langToggle}
+          </button>
+          <button
+            type="button"
+            onClick={() => setPasswordOpen(true)}
+            aria-label={t.account.changePassword}
+            title={t.account.changePassword}
+            className={`${headerBtn} w-11 justify-center px-0`}
+          >
+            <KeyRound size={17} aria-hidden="true" />
           </button>
           <button
             type="button"
@@ -198,6 +209,7 @@ export default function Dashboard({
         {tab === 'gallery' && <GalleryTab />}
         {tab === 'messages' && <MessagesTab onUnreadChange={setUnread} />}
       </main>
+      <ChangePassword open={passwordOpen} onClose={() => setPasswordOpen(false)} />
     </>
   )
 }

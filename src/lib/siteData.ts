@@ -1,10 +1,10 @@
 import { useSyncExternalStore } from 'react'
 import { fallbackData, type SiteData } from '../content/fallback'
-import { getPublicDb, supabaseConfigured } from './supabase'
+import { api, apiConfigured } from './api'
 
 /**
- * loading  – Supabase is configured and the first fetch is in flight (show skeletons)
- * live     – data from Supabase (or the last good copy of it, while revalidating)
+ * loading  – the API is configured and the first fetch is in flight (show skeletons)
+ * live     – data from the API (or the last good copy of it, while revalidating)
  * fallback – the static content in src/content (no env vars, offline, or an error)
  */
 export type SiteDataStatus = 'loading' | 'live' | 'fallback'
@@ -40,7 +40,7 @@ function writeCache(data: SiteData) {
 }
 
 function initialState(): SiteDataState {
-  if (!supabaseConfigured) return { status: 'fallback', data: fallbackData }
+  if (!apiConfigured) return { status: 'fallback', data: fallbackData }
   // Repeat visits render the last good copy instantly, then refresh it in the background.
   const cached = readCache()
   return cached ? { status: 'live', data: cached } : { status: 'loading', data: fallbackData }
@@ -54,43 +54,17 @@ function setState(next: SiteDataState) {
   listeners.forEach((l) => l())
 }
 
-function unwrap<T>(res: { data: T | null; error: { message: string } | null }, what: string): T {
-  if (res.error) throw new Error(`${what}: ${res.error.message}`)
-  if (res.data === null) throw new Error(`${what}: no data`)
-  return res.data
-}
-
 async function fetchAll(): Promise<SiteData> {
-  const db = await getPublicDb()
-  // `visible` is also enforced by RLS; filtering here keeps hidden rows out even if a
-  // signed-in admin's browser ever reused this client.
-  const [settings, skills, languages, education, projects, publications, contentWork, gallery] =
-    await Promise.all([
-      db.from('site_settings').select('*').eq('id', 1).maybeSingle(),
-      db.from('skills').select('*').eq('visible', true).order('sort_order').order('created_at'),
-      db.from('languages').select('*').eq('visible', true).order('sort_order').order('created_at'),
-      db.from('education').select('*').eq('visible', true).order('sort_order').order('created_at'),
-      db.from('projects').select('*').eq('visible', true).order('sort_order').order('created_at'),
-      db.from('publications').select('*').eq('visible', true).order('sort_order').order('created_at'),
-      db.from('content_work').select('*').eq('visible', true).order('sort_order').order('created_at'),
-      db.from('gallery').select('*').eq('visible', true).order('sort_order').order('created_at'),
-    ])
-  return {
-    settings: unwrap(settings, 'site_settings (did you run supabase/seed.sql?)'),
-    skills: unwrap(skills, 'skills'),
-    languages: unwrap(languages, 'languages'),
-    education: unwrap(education, 'education'),
-    projects: unwrap(projects, 'projects'),
-    publications: unwrap(publications, 'publications'),
-    contentWork: unwrap(contentWork, 'content_work'),
-    gallery: unwrap(gallery, 'gallery'),
-  }
+  // One payload with everything visible (GET /api/content).
+  const data = await api<unknown>('/api/content', { signal: AbortSignal.timeout(TIMEOUT_MS) })
+  if (!isSiteData(data)) throw new Error('Unexpected /api/content response')
+  return data
 }
 
 let started = false
 /** Starts the one-and-only fetch. Called as early as possible from main.tsx. */
 export function loadSiteData() {
-  if (started || !supabaseConfigured) return
+  if (started || !apiConfigured) return
   started = true
   const timer = window.setTimeout(() => {
     if (state.status === 'loading') setState({ status: 'fallback', data: fallbackData })
