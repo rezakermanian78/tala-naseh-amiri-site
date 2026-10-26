@@ -1,9 +1,11 @@
 import { ArrowUp, Camera } from 'lucide-react'
-import { site } from '../content/site'
 import { useContent } from '../hooks/useContent'
+import { useSiteContent } from '../hooks/useSiteContent'
 
 export default function Footer() {
   const { content } = useContent()
+  const { profile } = useSiteContent()
+  const instagram = profile.socials.instagram
   return (
     <footer className="relative bg-blush py-12">
       <div
@@ -12,15 +14,15 @@ export default function Footer() {
       />
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-5 text-center sm:flex-row sm:justify-between sm:px-8 sm:text-start">
         <div className="text-sm">
-          <p className="font-bold text-plum">{content.meta.name}</p>
+          <p className="font-bold text-plum">{profile.name}</p>
           <p className="mt-1">
-            © {new Date().getFullYear()} {content.meta.name}. {content.footer.rights}
+            © {new Date().getFullYear()} {profile.name}. {content.footer.rights}
           </p>
           <p>{content.footer.built}</p>
         </div>
-        {site.socials.instagram && (
+        {instagram && (
           <a
-            href={site.socials.instagram}
+            href={instagram}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-ghost"

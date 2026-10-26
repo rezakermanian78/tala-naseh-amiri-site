@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useActiveSection } from '../hooks/useActiveSection'
 import { useContent } from '../hooks/useContent'
+import { useSiteContent } from '../hooks/useSiteContent'
 import { useTheme } from '../hooks/useTheme'
 
 const iconBtn =
@@ -13,6 +14,7 @@ export default function Navbar() {
   const { content, lang, isRtl } = useContent()
   const { i18n } = useTranslation()
   const { dark, toggle } = useTheme()
+  const { profile } = useSiteContent()
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { nav } = content
@@ -68,7 +70,7 @@ export default function Navbar() {
       >
         <a
           href="#top"
-          aria-label={content.meta.name}
+          aria-label={profile.name}
           className="flex min-h-11 items-center gap-2 font-extrabold text-plum"
         >
           <span
@@ -77,7 +79,7 @@ export default function Navbar() {
           >
             {content.meta.monogram}
           </span>
-          <span className="hidden sm:inline">{content.meta.name}</span>
+          <span className="hidden sm:inline">{profile.name}</span>
         </a>
 
         <ul ref={listRef} className="relative hidden items-center gap-1 lg:flex">

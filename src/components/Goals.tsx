@@ -1,16 +1,25 @@
 import { Brain } from 'lucide-react'
 import { useContent } from '../hooks/useContent'
+import { useSiteContent } from '../hooks/useSiteContent'
 import Card from './Card'
 import Reveal from './Reveal'
 import Section from './Section'
+import { SkeletonText } from './Skeleton'
 
 export default function Goals() {
   const { goals } = useContent().content
-  const lists = [{ title: goals.areasTitle, items: goals.areas, Icon: Brain }]
+  const { profile, loading } = useSiteContent()
+  const lists = [{ title: goals.areasTitle, items: profile.researchInterests, Icon: Brain }].filter(
+    (l) => loading || l.items.length > 0,
+  )
   return (
-    <Section id="goals" eyebrow={goals.eyebrow} title={goals.title} tone="blush">
+    <Section id="goals" eyebrow={goals.eyebrow} title={goals.title} tone="blush" busy={loading}>
       <Reveal>
-        <p className="max-w-3xl text-base leading-relaxed sm:text-lg">{goals.intro}</p>
+        {loading ? (
+          <SkeletonText lines={3} className="max-w-3xl" />
+        ) : (
+          <p className="max-w-3xl text-base leading-relaxed sm:text-lg">{profile.goalsIntro}</p>
+        )}
       </Reveal>
       <div className="mt-10 grid gap-6">
         {lists.map(({ title, items, Icon }, i) => (
@@ -21,6 +30,7 @@ export default function Goals() {
               </span>
               {title}
             </h3>
+            {loading && <SkeletonText lines={3} className="mt-5" />}
             <ul className="mt-5 grid gap-3 sm:grid-cols-2">
               {items.map((it, n) => (
                 <li key={`${it}-${n}`} className="flex gap-3">

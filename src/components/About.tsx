@@ -1,20 +1,25 @@
 import { useContent } from '../hooks/useContent'
+import { useSiteContent } from '../hooks/useSiteContent'
 import Card from './Card'
 import Counter from './Counter'
 import Reveal from './Reveal'
 import Section from './Section'
+import { SkeletonText } from './Skeleton'
 
 export default function About() {
   const { about } = useContent().content
+  const { profile, loading } = useSiteContent()
   return (
-    <Section id="about" eyebrow={about.eyebrow} title={about.title}>
+    <Section id="about" eyebrow={about.eyebrow} title={about.title} busy={loading}>
       <div className="grid gap-10 md:grid-cols-[1.4fr_1fr] md:gap-14">
         <div className="space-y-5 text-base leading-relaxed sm:text-lg">
-          {about.paragraphs.map((p, i) => (
-            <Reveal key={p} delay={i * 0.08}>
-              <p>{p}</p>
-            </Reveal>
-          ))}
+          {loading
+            ? [0, 1, 2].map((i) => <SkeletonText key={i} lines={3} />)
+            : profile.bio.map((p, i) => (
+                <Reveal key={`${i}-${p.slice(0, 24)}`} delay={i * 0.08}>
+                  <p>{p}</p>
+                </Reveal>
+              ))}
         </div>
         <Card delay={0.1}>
           <dl className="space-y-5">

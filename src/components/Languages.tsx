@@ -1,24 +1,40 @@
 import { m } from 'framer-motion'
 import { useContent } from '../hooks/useContent'
+import { useSiteContent } from '../hooks/useSiteContent'
 import Card from './Card'
 import Section from './Section'
+import { SkeletonCard } from './Skeleton'
 
 const MAX = 5
 
 export default function Languages() {
   const { content, isRtl } = useContent()
   const { languages } = content
+  const { languages: items, loading } = useSiteContent()
   return (
-    <Section id="languages" eyebrow={languages.eyebrow} title={languages.title}>
+    <Section
+      id="languages"
+      eyebrow={languages.eyebrow}
+      title={languages.title}
+      busy={loading}
+    >
       <ul className="grid gap-6 sm:grid-cols-2">
-        {languages.items.map((l, i) => (
-          <li key={l.name} className="sm:[&:last-child:nth-child(odd)]:col-span-2">
+        {loading &&
+          [0, 1, 2, 3].map((i) => (
+            <li key={i} aria-hidden="true">
+              <SkeletonCard />
+            </li>
+          ))}
+        {items.map((l, i) => (
+          <li key={l.id} className="sm:[&:last-child:nth-child(odd)]:col-span-2">
             <Card delay={i * 0.08}>
               <div className="flex items-baseline justify-between gap-3">
                 <h3 className="text-xl font-bold">{l.name}</h3>
-                <span dir="auto" className="text-base">
-                  {l.native}
-                </span>
+                {l.native && (
+                  <span dir="auto" className="text-base">
+                    {l.native}
+                  </span>
+                )}
               </div>
               <div
                 role="img"
