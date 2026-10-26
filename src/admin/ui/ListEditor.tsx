@@ -357,6 +357,8 @@ function Row<R extends { id: string; visible: boolean }>({
   return (
     <Reorder.Item
       value={row}
+      // Animate position only: scaling would blur the form while a card expands.
+      layout="position"
       dragListener={false}
       dragControls={controls}
       onDragEnd={onDragEnd}

@@ -228,7 +228,7 @@ export default function Contact() {
               {errorText('message')}
             </label>
             {/* Honeypot: invisible to people, tempting to bots. */}
-            <div aria-hidden="true" className="absolute -start-[9999px] h-px w-px overflow-hidden">
+            <div aria-hidden="true" className="sr-only">
               <label>
                 Website
                 <input name="website" type="text" tabIndex={-1} autoComplete="off" />
