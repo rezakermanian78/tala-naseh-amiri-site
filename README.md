@@ -32,7 +32,7 @@ Still static (edit in `en.ts` / `fa.ts`): the About "facts" card and the three s
                                                        └─ Volume /data → uploads
 ```
 
-`server/` is a Node 20 + TypeScript app: Fastify, zod, Drizzle ORM (migrations in
+`server/` is a Node 22 + TypeScript app: Fastify, zod, Drizzle ORM (migrations in
 `server/drizzle/`), PostgreSQL, pino logs.
 
 | Route | Who | What |
@@ -52,7 +52,7 @@ random names. Errors always look like `{ "error": { "code", "message" } }`.
 
 ### Local development
 
-Needs Docker (for Postgres + API) and Node 20+.
+Needs Docker (for Postgres + API) and Node 22+.
 
 ```bash
 docker compose up --build    # Postgres on :5432, API on http://localhost:8787

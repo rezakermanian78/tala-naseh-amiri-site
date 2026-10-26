@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 # ── build ──
-FROM node:20-alpine AS build
+FROM node:22-alpine AS build
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
@@ -9,7 +9,7 @@ COPY src ./src
 RUN npm run build && npm prune --omit=dev
 
 # ── runtime ──
-FROM node:20-alpine
+FROM node:22-alpine
 RUN apk add --no-cache su-exec
 ENV NODE_ENV=production \
     PORT=8787 \
