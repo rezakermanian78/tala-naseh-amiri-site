@@ -1,0 +1,433 @@
+{
+  "settings": {
+    "name_en": "Tala Naseh Amiri",
+    "name_fa": "طلا ناصح امیری",
+    "headline_en": "Electrical Engineer · Aspiring AI Researcher",
+    "headline_fa": "مهندس برق · پژوهشگر آینده‌دار هوش مصنوعی",
+    "tagline_en": "Electrical engineering graduate (Power Systems) from the University of Tabriz, bringing a power-engineering mindset to artificial intelligence — from load forecasting to smart grid optimization.",
+    "tagline_fa": "فارغ‌التحصیل مهندسی برق (گرایش قدرت) از دانشگاه تبریز، با نگاهی مهندسی قدرت به دنیای هوش مصنوعی — از پیش‌بینی بار تا بهینه‌سازی شبکه هوشمند.",
+    "status_en": "Open to MSc in AI",
+    "status_fa": "آماده برای ارشد هوش مصنوعی",
+    "bio_en": "I am a graduate of Electrical Engineering from the University of Tabriz, specializing in Power Systems. My training in power systems and electrical machines taught me to reason carefully about how complex, interconnected systems work.\n\nThat curiosity is now pointing toward Artificial Intelligence: I plan to pursue a Master’s degree in AI and bring machine learning to power systems — for example load forecasting, fault detection and smart grid optimization.\n\nAlongside engineering, I am a professional Instagram content creator. I bring the same storytelling and communication skills to technical topics, making complex ideas clear and engaging.\n\nTODO: add one or two personal sentences about your story and motivation",
+    "bio_fa": "من فارغ‌التحصیل مهندسی برق، گرایش قدرت، از دانشگاه تبریز هستم. آموزش در حوزه سیستم‌های قدرت و ماشین‌های الکتریکی به من یاد داد دقیق فکر کنم و سازوکار سیستم‌های پیچیده و به‌هم‌پیوسته را بفهمم.\n\nاین کنجکاوی اکنون به سمت هوش مصنوعی رفته است: قصد دارم در مقطع کارشناسی ارشد هوش مصنوعی ادامه تحصیل بدهم و یادگیری ماشین را به سیستم‌های قدرت بیاورم — برای مثال پیش‌بینی بار، تشخیص خطا و بهینه‌سازی شبکه هوشمند.\n\nدر کنار مهندسی، تولیدکننده حرفه‌ای محتوا در اینستاگرام هستم. همین مهارت روایت‌گری و ارتباط را به موضوعات فنی می‌آورم تا مفاهیم پیچیده روشن و جذاب شوند.\n\nTODO: یک یا دو جمله شخصی درباره مسیر و انگیزه خود اضافه کنید",
+    "content_intro_en": "Alongside my engineering path, I work as a professional Instagram content creator. I use storytelling, visuals and short-form video to make ideas easier to understand and share.",
+    "content_intro_fa": "در کنار مسیر مهندسی، به‌صورت حرفه‌ای در اینستاگرام تولید محتوا می‌کنم. از روایت‌گری، تصویر و ویدیوی کوتاه استفاده می‌کنم تا ایده‌ها آسان‌تر فهمیده و به اشتراک گذاشته شوند.",
+    "goals_intro_en": "I am preparing to continue my studies with a Master’s degree in AI, moving from Electrical Engineering (Power Systems) into AI — applying modern machine learning to power systems, such as load forecasting, fault detection and smart grid optimization.",
+    "goals_intro_fa": "در حال آماده‌سازی برای ادامه تحصیل در مقطع کارشناسی ارشد هوش مصنوعی هستم و از مهندسی برق (گرایش قدرت) به سمت هوش مصنوعی می‌روم — برای به‌کارگیری یادگیری ماشین مدرن در سیستم‌های قدرت، مانند پیش‌بینی بار، تشخیص خطا و بهینه‌سازی شبکه هوشمند.",
+    "research_interests_en": [
+      "Large Language Models in Healthcare",
+      "Explainable AI for Intrusion Detection",
+      "AI-Driven Compiler Optimization",
+      "Fog/Edge Computing Resource Allocation",
+      "Machine Learning for Algorithmic Trading",
+      "AI for Power Systems & Smart Grids"
+    ],
+    "research_interests_fa": [
+      "مدل‌های زبانی بزرگ در سلامت و پزشکی",
+      "هوش مصنوعی توضیح‌پذیر برای تشخیص نفوذ",
+      "بهینه‌سازی کامپایلر مبتنی بر هوش مصنوعی",
+      "تخصیص منابع در رایانش مه/لبه",
+      "یادگیری ماشین برای معاملات الگوریتمی",
+      "هوش مصنوعی برای سیستم‌های قدرت و شبکه‌های هوشمند"
+    ],
+    "email": "talanasehamiri@gmail.com",
+    "linkedin_url": "https://www.linkedin.com/in/tala-naseh-amiri-513a54318/",
+    "github_url": "",
+    "instagram_url": "",
+    "avatar_url": "",
+    "cv_url": "/cv.pdf",
+    "seo_title_en": "Tala Naseh Amiri — Electrical Engineer · Aspiring AI Researcher",
+    "seo_title_fa": "طلا ناصح امیری — مهندس برق · پژوهشگر آینده‌دار هوش مصنوعی",
+    "seo_description_en": "Tala Naseh Amiri, electrical engineering (Power Systems) graduate of the University of Tabriz, pursuing a Master's degree in Artificial Intelligence, and a professional Instagram content creator.",
+    "seo_description_fa": "طلا ناصح امیری، فارغ‌التحصیل مهندسی برق (گرایش قدرت) از دانشگاه تبریز، در مسیر کارشناسی ارشد هوش مصنوعی و تولیدکننده حرفه‌ای محتوا در اینستاگرام."
+  },
+  "skills": [
+    {
+      "sort_order": 10,
+      "visible": true,
+      "group_en": "Engineering",
+      "group_fa": "مهندسی",
+      "name_en": "Power Systems Analysis",
+      "name_fa": "تحلیل سیستم‌های قدرت",
+      "level": null
+    },
+    {
+      "sort_order": 20,
+      "visible": true,
+      "group_en": "Engineering",
+      "group_fa": "مهندسی",
+      "name_en": "Electrical Machines",
+      "name_fa": "ماشین‌های الکتریکی",
+      "level": null
+    },
+    {
+      "sort_order": 30,
+      "visible": true,
+      "group_en": "Engineering",
+      "group_fa": "مهندسی",
+      "name_en": "Power System Protection",
+      "name_fa": "حفاظت سیستم‌های قدرت",
+      "level": null
+    },
+    {
+      "sort_order": 40,
+      "visible": true,
+      "group_en": "Engineering",
+      "group_fa": "مهندسی",
+      "name_en": "Power Electronics",
+      "name_fa": "الکترونیک قدرت",
+      "level": null
+    },
+    {
+      "sort_order": 50,
+      "visible": true,
+      "group_en": "Engineering",
+      "group_fa": "مهندسی",
+      "name_en": "Smart Grids",
+      "name_fa": "شبکه‌های هوشمند",
+      "level": null
+    },
+    {
+      "sort_order": 60,
+      "visible": true,
+      "group_en": "Engineering",
+      "group_fa": "مهندسی",
+      "name_en": "Renewable Energy",
+      "name_fa": "انرژی‌های تجدیدپذیر",
+      "level": null
+    },
+    {
+      "sort_order": 70,
+      "visible": true,
+      "group_en": "Engineering",
+      "group_fa": "مهندسی",
+      "name_en": "High-Voltage Engineering",
+      "name_fa": "مهندسی فشار قوی",
+      "level": null
+    },
+    {
+      "sort_order": 80,
+      "visible": true,
+      "group_en": "Engineering",
+      "group_fa": "مهندسی",
+      "name_en": "MATLAB / Simulink",
+      "name_fa": "MATLAB / Simulink",
+      "level": null
+    },
+    {
+      "sort_order": 90,
+      "visible": true,
+      "group_en": "Engineering",
+      "group_fa": "مهندسی",
+      "name_en": "AutoCAD",
+      "name_fa": "اتوکد",
+      "level": null
+    },
+    {
+      "sort_order": 100,
+      "visible": true,
+      "group_en": "Programming & AI",
+      "group_fa": "برنامه‌نویسی و هوش مصنوعی",
+      "name_en": "Python",
+      "name_fa": "Python",
+      "level": null
+    },
+    {
+      "sort_order": 110,
+      "visible": true,
+      "group_en": "Programming & AI",
+      "group_fa": "برنامه‌نویسی و هوش مصنوعی",
+      "name_en": "Machine Learning",
+      "name_fa": "یادگیری ماشین",
+      "level": null
+    },
+    {
+      "sort_order": 120,
+      "visible": true,
+      "group_en": "Programming & AI",
+      "group_fa": "برنامه‌نویسی و هوش مصنوعی",
+      "name_en": "Deep Learning",
+      "name_fa": "یادگیری عمیق",
+      "level": null
+    },
+    {
+      "sort_order": 130,
+      "visible": true,
+      "group_en": "Programming & AI",
+      "group_fa": "برنامه‌نویسی و هوش مصنوعی",
+      "name_en": "LLMs & RAG",
+      "name_fa": "مدل‌های زبانی بزرگ و RAG",
+      "level": null
+    },
+    {
+      "sort_order": 140,
+      "visible": true,
+      "group_en": "Programming & AI",
+      "group_fa": "برنامه‌نویسی و هوش مصنوعی",
+      "name_en": "Explainable AI (XAI)",
+      "name_fa": "هوش مصنوعی توضیح‌پذیر (XAI)",
+      "level": null
+    },
+    {
+      "sort_order": 150,
+      "visible": true,
+      "group_en": "Programming & AI",
+      "group_fa": "برنامه‌نویسی و هوش مصنوعی",
+      "name_en": "Data Analysis",
+      "name_fa": "تحلیل داده",
+      "level": null
+    },
+    {
+      "sort_order": 160,
+      "visible": true,
+      "group_en": "Programming & AI",
+      "group_fa": "برنامه‌نویسی و هوش مصنوعی",
+      "name_en": "FastAPI",
+      "name_fa": "FastAPI",
+      "level": null
+    },
+    {
+      "sort_order": 170,
+      "visible": true,
+      "group_en": "Programming & AI",
+      "group_fa": "برنامه‌نویسی و هوش مصنوعی",
+      "name_en": "React",
+      "name_fa": "React",
+      "level": null
+    },
+    {
+      "sort_order": 180,
+      "visible": true,
+      "group_en": "Content & Creative",
+      "group_fa": "محتوا و خلاقیت",
+      "name_en": "Instagram Content Creation",
+      "name_fa": "تولید محتوای اینستاگرام",
+      "level": null
+    },
+    {
+      "sort_order": 190,
+      "visible": true,
+      "group_en": "Content & Creative",
+      "group_fa": "محتوا و خلاقیت",
+      "name_en": "Reels & Short-Form Video",
+      "name_fa": "ریلز و ویدیوی کوتاه",
+      "level": null
+    },
+    {
+      "sort_order": 200,
+      "visible": true,
+      "group_en": "Content & Creative",
+      "group_fa": "محتوا و خلاقیت",
+      "name_en": "Content Strategy",
+      "name_fa": "استراتژی محتوا",
+      "level": null
+    },
+    {
+      "sort_order": 210,
+      "visible": true,
+      "group_en": "Content & Creative",
+      "group_fa": "محتوا و خلاقیت",
+      "name_en": "Visual Storytelling",
+      "name_fa": "روایت‌گری بصری",
+      "level": null
+    },
+    {
+      "sort_order": 220,
+      "visible": true,
+      "group_en": "Content & Creative",
+      "group_fa": "محتوا و خلاقیت",
+      "name_en": "Video Editing",
+      "name_fa": "تدوین ویدیو",
+      "level": null
+    },
+    {
+      "sort_order": 230,
+      "visible": true,
+      "group_en": "Content & Creative",
+      "group_fa": "محتوا و خلاقیت",
+      "name_en": "Social Media Branding",
+      "name_fa": "برندسازی در شبکه‌های اجتماعی",
+      "level": null
+    },
+    {
+      "sort_order": 240,
+      "visible": true,
+      "group_en": "Tools",
+      "group_fa": "ابزارها",
+      "name_en": "Git & GitHub",
+      "name_fa": "Git و GitHub",
+      "level": null
+    },
+    {
+      "sort_order": 250,
+      "visible": true,
+      "group_en": "Tools",
+      "group_fa": "ابزارها",
+      "name_en": "Jupyter",
+      "name_fa": "Jupyter",
+      "level": null
+    },
+    {
+      "sort_order": 260,
+      "visible": true,
+      "group_en": "Tools",
+      "group_fa": "ابزارها",
+      "name_en": "LaTeX",
+      "name_fa": "LaTeX",
+      "level": null
+    },
+    {
+      "sort_order": 270,
+      "visible": true,
+      "group_en": "Tools",
+      "group_fa": "ابزارها",
+      "name_en": "Linux",
+      "name_fa": "Linux",
+      "level": null
+    },
+    {
+      "sort_order": 280,
+      "visible": true,
+      "group_en": "Tools",
+      "group_fa": "ابزارها",
+      "name_en": "Docker",
+      "name_fa": "Docker",
+      "level": null
+    }
+  ],
+  "languages": [
+    {
+      "sort_order": 10,
+      "visible": true,
+      "name_en": "Persian",
+      "name_fa": "فارسی",
+      "native_en": "فارسی",
+      "native_fa": "Persian",
+      "level": 5,
+      "level_en": "Native",
+      "level_fa": "زبان مادری"
+    },
+    {
+      "sort_order": 20,
+      "visible": true,
+      "name_en": "Turkish",
+      "name_fa": "ترکی استانبولی",
+      "native_en": "Türkçe",
+      "native_fa": "Türkçe",
+      "level": 5,
+      "level_en": "Excellent",
+      "level_fa": "عالی"
+    },
+    {
+      "sort_order": 30,
+      "visible": true,
+      "name_en": "Azeri",
+      "name_fa": "آذری",
+      "native_en": "Azərbaycanca",
+      "native_fa": "Azərbaycanca",
+      "level": 5,
+      "level_en": "Excellent",
+      "level_fa": "عالی"
+    },
+    {
+      "sort_order": 40,
+      "visible": true,
+      "name_en": "English",
+      "name_fa": "انگلیسی",
+      "native_en": "English",
+      "native_fa": "English",
+      "level": 5,
+      "level_en": "Excellent",
+      "level_fa": "عالی"
+    },
+    {
+      "sort_order": 50,
+      "visible": true,
+      "name_en": "German",
+      "name_fa": "آلمانی",
+      "native_en": "Deutsch",
+      "native_fa": "Deutsch",
+      "level": 3,
+      "level_en": "Intermediate",
+      "level_fa": "متوسط"
+    }
+  ],
+  "education": [
+    {
+      "sort_order": 10,
+      "visible": true,
+      "title_en": "B.Sc. in Electrical Engineering",
+      "title_fa": "کارشناسی مهندسی برق",
+      "institution_en": "University of Tabriz",
+      "institution_fa": "دانشگاه تبریز",
+      "field_en": "Electrical Engineering, specialization: Power Systems",
+      "field_fa": "مهندسی برق، گرایش قدرت",
+      "start_date": "",
+      "end_date": "",
+      "description_en": "",
+      "description_fa": ""
+    }
+  ],
+  "projects": [
+    {
+      "sort_order": 10,
+      "visible": true,
+      "title_en": "When most ideas fail: pre-registered kill-tests, walk-forward discipline, and honest failure reporting in machine-learning trading system development: evidence from intraday gold (XAU/USD)",
+      "title_fa": "وقتی بیشتر ایده‌ها شکست می‌خورند: کل‌آزمون‌های پیش‌ثبت‌شده، انضباط اعتبارسنجی گام‌به‌گام و گزارش صادقانه شکست‌ها در توسعه سامانه‌های معاملاتی مبتنی بر یادگیری ماشین: شواهدی از طلای درون‌روزی (XAU/USD)",
+      "badge_en": "Research paper · Under review (2026)",
+      "badge_fa": "مقاله پژوهشی · در حال داوری (۲۰۲۶)",
+      "coauthors_en": "Reza Kermanian, Tala Naseh Amiri",
+      "coauthors_fa": "رضا کرمانیان، طلا ناصح امیری",
+      "description_en": "A pre-registered, walk-forward study of 13 machine-learning model variants on 5-minute XAU/USD data (2023-2026). Nine variants failed their own criteria and two edges survived, with every failure reported openly, including a 2026 out-of-time degradation.",
+      "description_fa": "یک مطالعه پیش‌ثبت‌شده و گام‌به‌گام (walk-forward) روی ۱۳ نوع مدل یادگیری ماشین با داده‌های ۵ دقیقه‌ای XAU/USD (۲۰۲۳ تا ۲۰۲۶). نُه مدل معیارهای خودشان را برآورده نکردند و دو مزیت پایدار ماند؛ همه شکست‌ها آشکارا گزارش شده‌اند، از جمله افت عملکرد خارج از زمان در سال ۲۰۲۶.",
+      "link": "",
+      "image_url": "",
+      "tags_en": [
+        "Machine Learning",
+        "Algorithmic Trading",
+        "Walk-Forward Validation",
+        "Reproducibility"
+      ],
+      "tags_fa": [
+        "یادگیری ماشین",
+        "معاملات الگوریتمی",
+        "اعتبارسنجی Walk-Forward",
+        "بازتولیدپذیری"
+      ]
+    }
+  ],
+  "publications": [],
+  "content_work": [
+    {
+      "sort_order": 10,
+      "visible": true,
+      "title_en": "Instagram Content",
+      "title_fa": "محتوای اینستاگرام",
+      "description_en": "Planning and publishing posts with a consistent visual style and a clear voice.",
+      "description_fa": "برنامه‌ریزی و انتشار پست‌ها با سبک بصری یکدست و صدایی روشن.",
+      "link": "",
+      "image_url": ""
+    },
+    {
+      "sort_order": 20,
+      "visible": true,
+      "title_en": "Reels & Short Video",
+      "title_fa": "ریلز و ویدیوی کوتاه",
+      "description_en": "Shooting and editing short-form video that tells a story in a few seconds.",
+      "description_fa": "فیلم‌برداری و تدوین ویدیوهای کوتاه که در چند ثانیه یک داستان تعریف می‌کنند.",
+      "link": "",
+      "image_url": ""
+    },
+    {
+      "sort_order": 30,
+      "visible": true,
+      "title_en": "Creative Direction",
+      "title_fa": "کارگردانی خلاق",
+      "description_en": "Shaping the concept, look and tone of a page so every piece feels part of one brand.",
+      "description_fa": "شکل‌دادن به ایده، ظاهر و لحن یک صفحه تا هر محتوا بخشی از یک برند یکپارچه باشد.",
+      "link": "",
+      "image_url": ""
+    }
+  ],
+  "gallery": []
+}
