@@ -8,18 +8,30 @@ import {
   useTransform,
 } from 'framer-motion'
 import { useRef, type PointerEvent } from 'react'
-import { site } from '../content/site'
 import { useContent } from '../hooks/useContent'
 import { useDesktopFx } from '../hooks/useDesktopFx'
+import { useSiteContent } from '../hooks/useSiteContent'
 import { INTRO_MS, introActive } from '../lib/intro'
 import Magnetic from './Magnetic'
 import NeuralNetwork from './NeuralNetwork'
+import { SkeletonLine, SkeletonText } from './Skeleton'
 
 const base = introActive ? INTRO_MS / 1000 - 0.15 : 0.1
+const avatarClass =
+  'relative h-full w-full rounded-full border-4 border-canvas object-cover shadow-lift'
+
+const isSameOrigin = (href: string) => {
+  try {
+    return new URL(href, window.location.href).origin === window.location.origin
+  } catch {
+    return false
+  }
+}
 
 export default function Hero() {
   const { content } = useContent()
   const { hero } = content
+  const { profile, loading } = useSiteContent()
   const fx = useDesktopFx()
   const reduced = useReducedMotion()
   const ref = useRef<HTMLElement>(null)
@@ -40,7 +52,7 @@ export default function Hero() {
     my.set((e.clientY / window.innerHeight - 0.5) * 2)
   }
 
-  const words = hero.name.split(' ')
+  const words = profile.name.split(' ')
   const lastWord = words.length - 1
   const rise = reduced ? { opacity: 0 } : { y: '110%', opacity: 0 }
   const fade = (d: number) => ({
@@ -55,6 +67,7 @@ export default function Hero() {
       ref={ref}
       onPointerMove={onMove}
       aria-labelledby="hero-title"
+      aria-busy={loading || undefined}
       className="grain relative isolate flex min-h-svh items-center overflow-hidden bg-gradient-to-b from-blush via-blush to-canvas pb-16 pt-24 sm:pt-28"
     >
       <m.div
@@ -77,19 +90,32 @@ export default function Hero() {
 
       <div className="mx-auto grid w-full max-w-6xl items-center gap-10 px-5 sm:px-8 md:grid-cols-[1.25fr_1fr] md:gap-8">
         <div className="order-2 md:order-1">
-          <m.p
-            {...fade(0)}
-            className="inline-flex items-center gap-2.5 rounded-full border border-line/20 bg-surface/70 px-4 py-2 text-sm font-semibold text-plum shadow-soft backdrop-blur"
-          >
-            <span className="relative flex h-2.5 w-2.5" aria-hidden="true">
-              <span className="absolute inset-0 rounded-full bg-emerald-500 motion-safe:animate-ping2" />
-              <span className="relative h-2.5 w-2.5 rounded-full bg-emerald-500" />
-            </span>
-            {hero.status}
-          </m.p>
+          {loading ? (
+            <SkeletonLine className="h-10 w-56 max-w-full" />
+          ) : (
+            profile.status && (
+              <m.p
+                {...fade(0)}
+                className="inline-flex items-center gap-2.5 rounded-full border border-line/20 bg-surface/70 px-4 py-2 text-sm font-semibold text-plum shadow-soft backdrop-blur"
+              >
+                <span className="relative flex h-2.5 w-2.5" aria-hidden="true">
+                  <span className="absolute inset-0 rounded-full bg-emerald-500 motion-safe:animate-ping2" />
+                  <span className="relative h-2.5 w-2.5 rounded-full bg-emerald-500" />
+                </span>
+                {profile.status}
+              </m.p>
+            )
+          )}
 
           <h1 id="hero-title" className="mt-6 text-display font-extrabold">
-            {words.map((w, i) => (
+            {loading && <span className="sr-only">{hero.name}</span>}
+            {loading && (
+              <span aria-hidden="true" className="block space-y-3 py-[0.1em]">
+                <SkeletonLine className="h-[0.8em] w-4/5" />
+                <SkeletonLine className="h-[0.8em] w-3/5" />
+              </span>
+            )}
+            {!loading && words.map((w, i) => (
               <span
                 key={i}
                 className="-mb-[0.1em] me-[0.25em] inline-block overflow-hidden pb-[0.25em] align-bottom"
@@ -109,19 +135,31 @@ export default function Hero() {
               </span>
             ))}
           </h1>
-          <m.p
-            {...fade(0.5)}
-            dir="auto"
-            className="mt-2 text-xl font-medium text-muted sm:text-2xl"
-          >
-            <bdi>{hero.nativeName}</bdi>
-          </m.p>
-          <m.p {...fade(0.6)} className="mt-6 text-lg font-semibold text-rose-ink sm:text-xl">
-            {hero.title}
-          </m.p>
-          <m.p {...fade(0.7)} className="mt-4 max-w-xl text-base leading-relaxed sm:text-lg">
-            {hero.tagline}
-          </m.p>
+          {loading ? (
+            <span aria-hidden="true" className="block">
+              <SkeletonLine className="mt-3 h-6 w-48" />
+              <SkeletonLine className="mt-7 h-6 w-4/5" />
+              <SkeletonText lines={3} className="mt-5 max-w-xl" />
+            </span>
+          ) : (
+            <>
+              {profile.nativeName && (
+                <m.p
+                  {...fade(0.5)}
+                  dir="auto"
+                  className="mt-2 text-xl font-medium text-muted sm:text-2xl"
+                >
+                  <bdi>{profile.nativeName}</bdi>
+                </m.p>
+              )}
+              <m.p {...fade(0.6)} className="mt-6 text-lg font-semibold text-rose-ink sm:text-xl">
+                {profile.headline}
+              </m.p>
+              <m.p {...fade(0.7)} className="mt-4 max-w-xl text-base leading-relaxed sm:text-lg">
+                {profile.tagline}
+              </m.p>
+            </>
+          )}
           <m.div {...fade(0.85)} className="mt-8 flex flex-wrap gap-3">
             <Magnetic>
               <a href="#contact" className="btn-primary">
@@ -130,7 +168,13 @@ export default function Hero() {
               </a>
             </Magnetic>
             <Magnetic>
-              <a href={site.cvPath} download className="btn-ghost">
+              <a
+                href={profile.cvUrl}
+                {...(isSameOrigin(profile.cvUrl)
+                  ? { download: true }
+                  : { target: '_blank', rel: 'noopener noreferrer' })}
+                className="btn-ghost"
+              >
                 <Download size={18} aria-hidden="true" />
                 {hero.cv}
               </a>
@@ -152,22 +196,36 @@ export default function Hero() {
               aria-hidden="true"
               className="absolute -inset-5 rounded-full border border-dashed border-rose-soft/60"
             />
-            <picture>
-              <source
-                type="image/webp"
-                srcSet="/avatar-640.webp 640w, /avatar.webp 1200w"
-                sizes="(min-width: 640px) 320px, 208px"
-              />
+            {loading ? (
+              <div className={`${avatarClass} animate-pulse bg-blush-deep motion-reduce:animate-none`} />
+            ) : profile.avatarUrl ? (
               <img
-                src="/avatar-640.jpg"
+                src={profile.avatarUrl}
                 alt={hero.avatarAlt}
                 width={640}
-                height={506}
+                height={640}
                 fetchPriority="high"
                 decoding="async"
-                className="relative h-full w-full rounded-full border-4 border-canvas object-cover shadow-lift [object-position:0%_20%]"
+                className={avatarClass}
               />
-            </picture>
+            ) : (
+              <picture>
+                <source
+                  type="image/webp"
+                  srcSet="/avatar-640.webp 640w, /avatar.webp 1200w"
+                  sizes="(min-width: 640px) 320px, 208px"
+                />
+                <img
+                  src="/avatar-640.jpg"
+                  alt={hero.avatarAlt}
+                  width={640}
+                  height={506}
+                  fetchPriority="high"
+                  decoding="async"
+                  className={`${avatarClass} [object-position:0%_20%]`}
+                />
+              </picture>
+            )}
           </div>
         </div>
       </div>

@@ -58,6 +58,7 @@ export const fa: Content = {
   education: {
     eyebrow: 'تحصیلات',
     title: 'مسیر تحصیلی',
+    periodTodo: todo('سال شروع – پایان'),
     items: [
       {
         period: todo('سال شروع – پایان'),
@@ -117,6 +118,8 @@ export const fa: Content = {
     title: 'منتخب کارها',
     linkLabel: 'مشاهده پروژه',
     coauthorsLabel: 'نویسندگان',
+    publicationsTitle: 'انتشارات',
+    readLabel: 'مطالعه',
     items: [
       {
         title:
@@ -152,6 +155,7 @@ export const fa: Content = {
     ],
     follow: 'در اینستاگرام دنبال کنید',
     featuredTitle: 'نمونه کارها',
+    viewPost: 'مشاهده',
   },
   languages: {
     eyebrow: 'زبان‌ها',
@@ -198,6 +202,10 @@ export const fa: Content = {
       sending: 'در حال ارسال…',
       success: 'سپاسگزارم! پیام شما ارسال شد.',
       error: 'مشکلی پیش آمد. لطفاً دوباره تلاش کنید یا مستقیم ایمیل بزنید.',
+      rateLimited: 'تعداد پیام‌ها در زمان کوتاه زیاد بود. لطفاً چند دقیقه صبر کنید و دوباره تلاش کنید.',
+      invalidName: 'لطفاً نام خود را وارد کنید.',
+      invalidEmail: 'لطفاً یک ایمیل معتبر وارد کنید.',
+      invalidMessage: 'لطفاً پیام خود را بنویسید (حداکثر ۵۰۰۰ نویسه).',
       mailtoSubject: 'پیام از وب‌سایت شما',
     },
   },

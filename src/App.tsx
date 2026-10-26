@@ -6,6 +6,7 @@ import Hero from './components/Hero'
 import Intro from './components/Intro'
 import Navbar from './components/Navbar'
 import { useContent } from './hooks/useContent'
+import { useSeo } from './hooks/useSeo'
 
 const Education = lazy(() => import('./components/Education'))
 const Skills = lazy(() => import('./components/Skills'))
@@ -19,6 +20,7 @@ const loadFeatures = () => import('./lib/motionFeatures').then((mod) => mod.defa
 
 export default function App() {
   const { content } = useContent()
+  useSeo()
   return (
     <LazyMotion features={loadFeatures} strict>
       <MotionConfig reducedMotion="user">

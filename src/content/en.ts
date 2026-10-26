@@ -1,3 +1,6 @@
+// Interface labels + the FALLBACK content. Once Supabase is set up, the editable content
+// (profile, skills, education, projects, …) comes from the database and is edited at /admin;
+// see src/content/fallback.ts for which fields map where.
 const todo = (what: string) => `TODO: ${what}`
 
 export const en = {
@@ -56,6 +59,7 @@ export const en = {
   education: {
     eyebrow: 'Education',
     title: 'Academic journey',
+    periodTodo: todo('start – end year'),
     items: [
       {
         period: todo('start – end year'),
@@ -115,6 +119,8 @@ export const en = {
     title: 'Selected work',
     linkLabel: 'View project',
     coauthorsLabel: 'Co-authors',
+    publicationsTitle: 'Publications',
+    readLabel: 'Read',
     items: [
       {
         title:
@@ -156,6 +162,7 @@ export const en = {
     ],
     follow: 'Follow on Instagram',
     featuredTitle: 'Featured work',
+    viewPost: 'View',
   },
   languages: {
     eyebrow: 'Languages',
@@ -202,6 +209,10 @@ export const en = {
       sending: 'Sending…',
       success: 'Thank you! Your message was sent.',
       error: 'Something went wrong. Please try again or email directly.',
+      rateLimited: 'Too many messages in a short time. Please wait a few minutes and try again.',
+      invalidName: 'Please enter your name.',
+      invalidEmail: 'Please enter a valid email address.',
+      invalidMessage: 'Please write a message (up to 5000 characters).',
       mailtoSubject: 'Message from your website',
     },
   },

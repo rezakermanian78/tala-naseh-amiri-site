@@ -8,18 +8,22 @@ export default function Section({
   eyebrow,
   title,
   tone = 'canvas',
+  busy = false,
   children,
 }: {
   id: string
   eyebrow: string
   title: string
   tone?: keyof typeof tones
+  /** True while the section's content is still loading. */
+  busy?: boolean
   children: ReactNode
 }) {
   return (
     <section
       id={id}
       aria-labelledby={`${id}-title`}
+      aria-busy={busy || undefined}
       className={`relative py-20 sm:py-28 lg:py-32 ${tones[tone]}`}
     >
       <div

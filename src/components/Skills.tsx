@@ -1,15 +1,19 @@
 import { m } from 'framer-motion'
 import { useContent } from '../hooks/useContent'
+import { useSiteContent } from '../hooks/useSiteContent'
 import Card from './Card'
 import Section from './Section'
+import { SkeletonCard } from './Skeleton'
 
 export default function Skills() {
   const { skills } = useContent().content
+  const { skillGroups, loading } = useSiteContent()
   return (
-    <Section id="skills" eyebrow={skills.eyebrow} title={skills.title}>
+    <Section id="skills" eyebrow={skills.eyebrow} title={skills.title} busy={loading}>
       <div className="grid gap-6 md:grid-cols-2">
-        {skills.groups.map((g, gi) => (
-          <Card key={g.name} delay={gi * 0.1}>
+        {loading && [0, 1, 2, 3].map((i) => <SkeletonCard key={i} />)}
+        {skillGroups.map((g, gi) => (
+          <Card key={`${gi}-${g.name}`} delay={gi * 0.1}>
             <h3 className="text-xl font-bold">{g.name}</h3>
             <ul className="mt-5 flex flex-wrap gap-2.5">
               {g.items.map((item, i) => (
