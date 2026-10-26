@@ -1,6 +1,6 @@
 import { Loader2, Mail, MailOpen, RefreshCw, Reply, Trash2 } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
-import type { MessageRow } from '../../lib/database.types'
+import type { MessageRow } from '../../lib/types'
 import { deleteMessage, fetchMessages, setMessageRead } from '../api'
 import { errorText, useConfirm, useToast } from '../feedback'
 import { useT } from '../i18n'
@@ -21,7 +21,7 @@ export default function MessagesTab({ onUnreadChange }: { onUnreadChange: (n: nu
   const fetchNow = useCallback(
     () =>
       fetchMessages().then(
-        (rows) => {
+        ({ messages: rows }) => {
           setItems(rows)
           setLoadError('')
         },

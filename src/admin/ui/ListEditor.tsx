@@ -9,7 +9,7 @@ import {
   type KeyboardEvent,
   type ReactNode,
 } from 'react'
-import type { Draft, ListRows, ListTable } from '../../lib/database.types'
+import type { Draft, ListRows, ListTable } from '../../lib/types'
 import { deleteRow, fetchRows, insertRow, removeMedia, saveOrder, updateRow } from '../api'
 import { useDirtyFlag } from '../dirty'
 import { errorText, useConfirm, useToast } from '../feedback'
@@ -109,14 +109,14 @@ export default function ListEditor<T extends ListTable>({
   }
 
   const persistOrder = async (ordered: ListRows[T][]) => {
-    const changes = ordered
-      .map((r, i) => ({ id: r.id, sort_order: (i + 1) * 10, before: r.sort_order }))
-      .filter((c) => c.sort_order !== c.before)
-      .map(({ id, sort_order }) => ({ id, sort_order }))
-    if (!changes.length) return
+    const changed = ordered.some((r, i) => r.sort_order !== (i + 1) * 10)
+    if (!changed) return
     setRows(ordered.map((r, i) => ({ ...r, sort_order: (i + 1) * 10 })))
     try {
-      await saveOrder(table, changes)
+      await saveOrder(
+        table,
+        ordered.map((r) => r.id),
+      )
       toast('success', t.orderSaved)
     } catch (err) {
       toast('error', `${t.orderFailed}: ${errorText(err)}`)

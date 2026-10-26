@@ -106,7 +106,7 @@ function localize(data: SiteData, lang: Lang, periodTodo: string) {
 
 export type SiteView = ReturnType<typeof localize> & { status: SiteDataStatus; loading: boolean }
 
-/** Editable site content (Supabase, or the static fallback) in the current language. */
+/** Editable site content (the API, or the static fallback) in the current language. */
 export function useSiteContent(): SiteView {
   const { lang, content } = useContent()
   const { status, data } = useSiteData()

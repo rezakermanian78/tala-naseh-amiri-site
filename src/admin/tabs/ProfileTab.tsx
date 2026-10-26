@@ -1,6 +1,6 @@
 import { Loader2 } from 'lucide-react'
 import { useCallback, useEffect, useState, type FormEvent } from 'react'
-import type { SiteSettingsRow } from '../../lib/database.types'
+import type { SiteSettingsRow } from '../../lib/types'
 import { fetchSettings, saveSettings } from '../api'
 import { useDirtyFlag } from '../dirty'
 import { errorText, useToast } from '../feedback'

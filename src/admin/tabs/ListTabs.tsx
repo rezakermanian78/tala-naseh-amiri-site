@@ -1,5 +1,5 @@
 import { useId } from 'react'
-import type { Draft } from '../../lib/database.types'
+import type { Draft } from '../../lib/types'
 import { useT } from '../i18n'
 import { BiTagsField, BiTextField, LevelField, TextField } from '../ui/fields'
 import ListEditor from '../ui/ListEditor'

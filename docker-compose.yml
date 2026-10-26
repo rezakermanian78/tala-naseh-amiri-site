@@ -1,0 +1,48 @@
+# Local development: Postgres + the API.
+#   docker compose up --build          → API on http://localhost:8787
+#   npm run dev                        → site on http://localhost:5173 (talks to the API)
+# Dev-only defaults below; real secrets live in Railway's variables, never in this file.
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: tala
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./server/docker/init-test-db.sql:/docker-entrypoint-initdb.d/init-test-db.sql:ro
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d tala']
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  api:
+    build: ./server
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 8787
+      DATABASE_URL: postgres://postgres:postgres@db:5432/tala
+      JWT_SECRET: ${JWT_SECRET:-local-dev-only-secret-not-for-production-000000}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-talanasehamiri@gmail.com}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-local-dev-password}
+      CORS_ORIGINS: http://localhost:5173
+      PUBLIC_URL: http://localhost:8787
+      # No proxy in front of the API locally.
+      TRUST_PROXY: 0
+      # Plain http locally: send the session cookie without the Secure flag.
+      COOKIE_SECURE: 'false'
+    ports:
+      - '8787:8787'
+    volumes:
+      - uploads:/data
+
+volumes:
+  pgdata:
+  uploads:

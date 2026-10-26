@@ -1,5 +1,5 @@
-// Builds the site data from the static files in src/content. Used when Supabase is not
-// configured or unreachable, and by scripts/gen-seed.ts to produce supabase/seed.sql,
+// Builds the site data from the static files in src/content. Used when the API is not
+// configured or unreachable, and by scripts/gen-seed.ts to produce server/src/db/seed-data.json,
 // so the database starts out identical to what the site shows today.
 import type {
   ContentWorkRow,
@@ -10,7 +10,7 @@ import type {
   PublicationRow,
   SiteSettingsRow,
   SkillRow,
-} from '../lib/database.types'
+} from '../lib/types'
 import { en } from './en'
 import { fa } from './fa'
 import { site } from './site'

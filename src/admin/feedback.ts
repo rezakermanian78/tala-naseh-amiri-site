@@ -17,7 +17,7 @@ export const ConfirmContext = createContext<(opts: ConfirmOptions) => Promise<bo
 export const useToast = () => useContext(ToastContext)
 export const useConfirm = () => useContext(ConfirmContext)
 
-/** Turns any thrown value / Supabase error into readable text. */
+/** Turns any thrown value / API error into readable text. */
 export function errorText(err: unknown): string {
   if (err instanceof Error) return err.message
   if (typeof err === 'object' && err !== null && 'message' in err) {

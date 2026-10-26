@@ -1,4 +1,4 @@
-/** Placeholder shown while the first Supabase fetch is in flight. Sized like the real content
+/** Placeholder shown while the first API fetch is in flight. Sized like the real content
  *  so nothing jumps when it arrives. */
 export function SkeletonLine({ className = '' }: { className?: string }) {
   return (

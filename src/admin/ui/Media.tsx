@@ -52,7 +52,7 @@ export function ImageField({
     try {
       const { blob, ext } = await compressImage(file, maxSize)
       setLocalPreview(URL.createObjectURL(blob))
-      const url = await uploadMedia(folder, blob, ext, blob.type)
+      const url = await uploadMedia(blob, `${folder}.${ext}`)
       onChange(url)
     } catch (err) {
       toast('error', `${t.uploadFailed}: ${errorText(err)}`)
@@ -149,7 +149,7 @@ export function PdfField({
     }
     setBusy(true)
     try {
-      onChange(await uploadMedia('cv', file, 'pdf', 'application/pdf'))
+      onChange(await uploadMedia(file, 'cv.pdf'))
     } catch (err) {
       toast('error', `${t.uploadFailed}: ${errorText(err)}`)
     } finally {

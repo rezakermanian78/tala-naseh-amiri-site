@@ -14,114 +14,147 @@ npm run format
 
 ## Editing content
 
-Once the backend is set up (below), **all editable content is managed at `/admin`** — no code,
+Once the API is running (below), **all editable content is managed at `/admin`** — no code,
 no redeploy. The files in `src/content/` remain as:
 
 - the **interface labels** (navigation, section titles, form labels) in `en.ts` / `fa.ts`, and
-- the **fallback content**, shown when Supabase is not configured or unreachable. The same
-  files generate `supabase/seed.sql` (`npm run db:seed:gen`), so the database starts out
-  identical to them.
+- the **fallback content**, shown when the API is not configured or unreachable. The same files
+  generate the database's starter content (`npm run db:seed:gen` →
+  `server/src/db/seed-data.json`), so a fresh database matches the site exactly.
 
 Still static (edit in `en.ts` / `fa.ts`): the About "facts" card and the three stat counters.
 
 ## Backend & Admin
 
-Supabase (free tier) provides Postgres, Auth and Storage. The browser talks to it directly;
-**Row Level Security** decides what each visitor may do:
-
-| Who | Can |
-| --- | --- |
-| Anyone | read visible content, send a contact message |
-| `talanasehamiri@gmail.com` (signed in) | edit everything, read/delete messages, upload files |
-
-The admin email lives in `public.is_admin()` in `supabase/migrations/0001_init.sql`.
-
-### 1. Create the Supabase project
-
-1. Sign in at [supabase.com](https://supabase.com) → **New project** (any region close to your
-   visitors, e.g. Frankfurt). Save the database password somewhere safe.
-2. **SQL Editor → New query**: paste all of `supabase/migrations/0001_init.sql` → **Run**.
-3. New query again: paste `supabase/seed.sql` → **Run**. This imports the current site content.
-   It is safe to run twice; it never overwrites edits.
-
-### 2. Configure sign-in (passwordless)
-
-In **Authentication**:
-
-1. **Sign In / Providers → Email**: keep Email enabled, and **turn off "Allow new users to sign
-   up"**. Nobody can create an account from the site.
-2. **URL Configuration**:
-   - Site URL: `https://talanasehamiri.ir`
-   - Redirect URLs: add `https://talanasehamiri.ir/admin` and `http://localhost:5173/admin`
-     (add your `*.vercel.app/admin` URL too if you use preview deployments).
-3. **Emails → Magic Link** template: so Tala can also type a code on her phone, make the body
-   include the code as well as the link, e.g.
-   `<p><a href="{{ .ConfirmationURL }}">Sign in</a></p><p>Or enter this code: {{ .Token }}</p>`
-4. **Users → Add user → Send invitation** to `talanasehamiri@gmail.com`. This creates the one
-   admin account (no password is ever set).
-
-Then open `/admin`, enter the email, and click the link in the email (or type the code).
-Supabase's built-in email sender is limited to a few emails per hour — plenty for one admin. For
-more, add your own SMTP under **Authentication → Emails → SMTP Settings**.
-
-### 3. Environment variables
-
-From **Project Settings → API** copy the Project URL and the `anon` / publishable key:
-
-```bash
-cp .env.example .env   # then fill in the two values
+```
+/            Vite site (Vercel)  ──fetch, cookies──▶  /server  Fastify API (Railway)
+                                                       ├─ PostgreSQL (Railway plugin)
+                                                       └─ Volume /data → uploads
 ```
 
-On Vercel: **Project → Settings → Environment Variables** → add `VITE_SUPABASE_URL` and
-`VITE_SUPABASE_ANON_KEY` (Production + Preview) → **Redeploy** once. After that, content
-changes never need a redeploy.
+`server/` is a Node 20 + TypeScript app: Fastify, zod, Drizzle ORM (migrations in
+`server/drizzle/`), PostgreSQL, pino logs.
 
-These two values are public by design. **Never** put the `service_role` / secret key in the
-frontend or in any `VITE_` variable.
+| Route | Who | What |
+| --- | --- | --- |
+| `GET /api/content` | anyone | everything visible, one payload (ETag) |
+| `POST /api/messages` | anyone | contact form (3 per IP per 10 min, honeypot) |
+| `GET /uploads/:file` | anyone | uploaded images / CV |
+| `POST /api/auth/login`, `/logout`, `/change-password`, `GET /api/auth/me` | — | session |
+| `/api/admin/*` | admin | CRUD + reorder for every section, settings, messages, uploads |
+| `GET /health` | — | Railway healthcheck |
 
-### How it behaves
+Security: one admin account (Argon2id password hash), session = signed JWT in an httpOnly,
+Secure, SameSite=Lax cookie (7 days, renewed while in use), Origin check against CSRF, login
+limited to 5 attempts per 15 minutes, CORS limited to the site's own domains, helmet headers,
+uploads checked by their real file type (JPEG/PNG/WebP/AVIF/PDF, max 8 MB) and stored under
+random names. Errors always look like `{ "error": { "code", "message" } }`.
 
-- The public site fetches all content once per visit (and shows the last good copy instantly on
-  repeat visits). Changes saved in the admin appear on the next page load.
-- If the env vars are missing, Supabase is down, or the request takes longer than 6 s, the site
-  renders the built-in content from `src/content/` instead.
-- The contact form writes to the `messages` table (validated, honeypot, max 3 messages per
-  visitor per 10 minutes, enforced both in the browser and in the database).
-- Images uploaded in the admin are resized and converted to WebP in the browser before upload,
-  then stored in the public `media` bucket.
-- `/admin` is a separate lazy-loaded bundle, marked `noindex` (meta tag, `X-Robots-Tag` header,
-  `robots.txt`) and not in the sitemap. The public site loads only a small query client; the full
-  `supabase-js` library is part of the admin bundle.
+### Local development
 
-### Optional: email notification for new messages
+Needs Docker (for Postgres + API) and Node 20+.
 
-`supabase/functions/notify-message/index.ts` sends an email (via [Resend](https://resend.com))
-for each new message. Setup steps are at the top of that file: deploy the function, set its
-secrets, then add a **Database Webhook** on `messages` → INSERT. The admin inbox works without it.
+```bash
+docker compose up --build    # Postgres on :5432, API on http://localhost:8787
+npm run dev                  # site on http://localhost:5173 (uses the local API automatically)
+```
+
+Open http://localhost:5173/admin and sign in with `talanasehamiri@gmail.com` /
+`local-dev-password` (dev-only defaults from `docker-compose.yml`).
+
+Without Docker: run Postgres yourself, `cp server/.env.example server/.env`, fill it in, then
+`cd server && npm install && npm run dev`.
+
+Server scripts (in `server/`): `npm run dev`, `npm test` (needs
+`TEST_DATABASE_URL=postgres://postgres:postgres@localhost:5432/tala_test` — the compose
+Postgres already has that database; the tests wipe it), `npm run lint`, `npm run typecheck`,
+`npm run build`, `npm run db:generate` (after changing `src/db/schema.ts`), `npm run db:migrate`,
+`npm run db:seed` (fills empty tables only; never overwrites edits).
+
+### Environment variables
+
+**Server** (`server/.env.example`):
+
+| Variable | |
+| --- | --- |
+| `DATABASE_URL` | Postgres connection string |
+| `JWT_SECRET` | 32+ random characters (`openssl rand -hex 32`) |
+| `ADMIN_EMAIL`, `ADMIN_PASSWORD` | create the admin account on the **first** start only |
+| `CORS_ORIGINS` | allowed sites, comma-separated (default: the two production domains + `http://localhost:5173`) |
+| `UPLOAD_DIR` | default `/data/uploads` in production |
+| `PUBLIC_URL` | `https://api.talanasehamiri.ir` (used in upload links) |
+| `PORT` | default 8787 (Railway sets it) |
+| `TRUST_PROXY` | proxy hops in front of the app, default 1 (Railway) |
+| `RESEND_API_KEY`, `NOTIFY_EMAIL` | optional: e-mail on each new message ([resend.com](https://resend.com)) |
+
+Migrations run automatically on every start; a completely empty database also gets the starter
+content.
+
+**Site** (`.env.example`): `VITE_API_URL=https://api.talanasehamiri.ir`. Until it is set, the
+production site shows the built-in content and the contact form opens the visitor's mail app —
+so deploying never breaks the live site.
+
+### Deploy the API on Railway
+
+1. [railway.com](https://railway.com) → **New Project → Deploy from GitHub repo** → this repo.
+2. In the new service → **Settings → Source → Root Directory**: `/server`. Railway then builds
+   `server/Dockerfile` and uses `server/railway.json` (healthcheck `GET /health`).
+3. **+ New → Database → PostgreSQL** in the same project.
+4. On the API service → **+ Volume**, mount path `/data`.
+5. API service → **Variables**:
+   - `DATABASE_URL` = `${{Postgres.DATABASE_URL}}` (reference variable)
+   - `JWT_SECRET` = output of `openssl rand -hex 32`
+   - `ADMIN_EMAIL` = `talanasehamiri@gmail.com`
+   - `ADMIN_PASSWORD` = a temporary password (12+ characters)
+   - `PUBLIC_URL` = `https://api.talanasehamiri.ir`
+   - `PORT` = `8787` (so the domain's target port below is fixed)
+   - optional `RESEND_API_KEY`, `NOTIFY_EMAIL`
+6. **Settings → Networking → Custom Domain** → `api.talanasehamiri.ir` (target port 8787).
+   Railway shows a CNAME target; in Cloudflare add `CNAME api → <that target>` with the proxy
+   **off** (DNS only, grey cloud). Wait until Railway shows the certificate as active.
+7. Check https://api.talanasehamiri.ir/health returns `{"ok":true}`.
+
+### Connect the site (Vercel)
+
+**Project → Settings → Environment Variables** → `VITE_API_URL` =
+`https://api.talanasehamiri.ir` (Production and Preview) → **Redeploy**. After that, content
+changes never need a redeploy. (Preview deployments on `*.vercel.app` aren't in `CORS_ORIGINS`,
+so they show the built-in content.)
+
+### First login
+
+1. Open https://talanasehamiri.ir/admin and sign in with `ADMIN_EMAIL` and the temporary
+   `ADMIN_PASSWORD`.
+2. Click the key icon (**Change password**) and choose a new one. This also signs out every other
+   device.
+3. Remove `ADMIN_PASSWORD` from Railway's variables — it is only read when no admin exists.
+
+Forgot the password? In Railway's Postgres **Data** tab run `delete from admin_users;`, set
+`ADMIN_PASSWORD` again and restart the API; the account is recreated on start.
 
 ### Backups
 
-- **Content**: Supabase **Table Editor → (table) → Export → CSV**, or from a terminal:
-  `pg_dump "<connection string from Project Settings → Database>" --data-only --schema=public > backup.sql`
-- **Files**: **Storage → media** → download, or keep the originals.
-- Free-tier projects pause after a week without activity; opening the dashboard (or any visit to
-  the site) wakes them. While paused, the site shows the built-in fallback content.
+- **Database**: Railway Postgres → **Backups** (enable scheduled backups), or from your computer
+  `pg_dump "<public DATABASE_URL from Railway>" > tala-$(date +%F).sql`
+  (restore with `psql "<url>" < file.sql`).
+- **Uploads**: they live on the volume (`/data/uploads`). Railway volumes support backups in the
+  volume's settings; the originals on your phone/computer are a good second copy.
 
-### Changing the admin email
+### Rotating `JWT_SECRET`
 
-Edit the address in `public.is_admin()` (run the `create or replace function` statement again in
-the SQL Editor), optionally set `VITE_ADMIN_EMAIL`, and invite the new address under
-**Authentication → Users**.
+Set a new random value in Railway (`openssl rand -hex 32`) and redeploy. Every session becomes
+invalid, so the admin simply signs in again; nothing else changes. Do it if you think the secret
+leaked, or every year or so.
 
 ## SEO / domain
 
-Replace `https://tala-naseh-amiri-site.vercel.app` in `index.html` (canonical, Open Graph, JSON-LD; the JSON-LD Person also carries the contact email), `public/sitemap.xml`, `public/robots.txt` and `src/content/site.ts`. `og:image` points at `/avatar.jpg`; swap in a dedicated 1200×630 `public/og-image.png` if you prefer.
+The production URL `https://talanasehamiri.ir` appears in `index.html` (canonical, Open Graph, JSON-LD; the JSON-LD Person also carries the contact email), `public/sitemap.xml`, `public/robots.txt` and `src/content/site.ts`. `og:image` points at `/avatar.jpg`; swap in a dedicated 1200×630 `public/og-image.png` if you prefer.
 
 ## Deploy to Vercel
 
 1. Push this folder to a Git repository.
 2. On vercel.com choose **Add New → Project** and import the repo (framework preset: Vite; build `npm run build`, output `dist`).
-3. Add the Supabase environment variables (see above), then deploy.
+3. Add `VITE_API_URL` (see above), then deploy.
 4. Add your custom domain under Project → Settings → Domains.
 
 `vercel.json` already contains the SPA rewrite and asset caching headers.

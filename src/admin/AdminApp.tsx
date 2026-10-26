@@ -1,8 +1,7 @@
-import type { Session } from '@supabase/supabase-js'
 import { Languages, Loader2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { ADMIN_EMAIL, supabaseConfigured } from '../lib/supabase'
-import { getSupabase } from '../lib/supabaseAdmin'
+import { apiConfigured, onUnauthorized } from '../lib/api'
+import { logout, me } from './api'
 import Dashboard from './Dashboard'
 import { hasUnsavedChanges } from './dirty'
 import { AdminLangContext, adminStrings, useT, type AdminLang } from './i18n'
@@ -18,9 +17,6 @@ function storedLang(): AdminLang {
     return 'en'
   }
 }
-
-// Read before supabase-js consumes the URL: an expired/invalid magic link lands here.
-const linkError = new URLSearchParams(window.location.hash.slice(1)).get('error_description')
 
 export default function AdminApp() {
   const [lang, setLang] = useState<AdminLang>(storedLang)
@@ -71,42 +67,41 @@ export default function AdminApp() {
   )
 }
 
+type Auth =
+  | { state: 'checking' }
+  | { state: 'signedOut' }
+  | { state: 'signedIn'; email: string; expired: boolean }
+
 function AuthGate({ onToggleLang }: { onToggleLang: () => void }) {
   const t = useT()
-  const [session, setSession] = useState<Session | null | undefined>(
-    supabaseConfigured ? undefined : null,
-  )
-  const [error, setError] = useState(linkError ?? '')
+  const [auth, setAuth] = useState<Auth>(apiConfigured ? { state: 'checking' } : { state: 'signedOut' })
 
+  // Who am I? (The session is an httpOnly cookie, so only the API can tell.)
   useEffect(() => {
-    if (!supabaseConfigured) return
-    let unsubscribe = () => {}
+    if (!apiConfigured) return
     let alive = true
-    void getSupabase().then((sb) => {
-      if (!alive) return
-      const { data } = sb.auth.onAuthStateChange((_event, s) => setSession(s))
-      unsubscribe = () => data.subscription.unsubscribe()
-      void sb.auth.getSession().then(({ data: d, error: e }) => {
-        if (e) setError(e.message)
-        setSession(d.session)
-      })
-    })
+    me().then(
+      ({ email }) => alive && setAuth({ state: 'signedIn', email, expired: false }),
+      () => alive && setAuth({ state: 'signedOut' }),
+    )
     return () => {
       alive = false
-      unsubscribe()
     }
   }, [])
 
-  // Clean "#error=…" or "#access_token=…" leftovers out of the address bar.
-  useEffect(() => {
-    if (session !== undefined && window.location.hash) {
-      history.replaceState(null, '', window.location.pathname + window.location.search)
-    }
-  }, [session])
+  // Any 401 later on (session expired, password changed elsewhere): ask to sign in again
+  // on top of the dashboard, so nothing typed so far is lost.
+  useEffect(
+    () =>
+      onUnauthorized(() =>
+        setAuth((a) => (a.state === 'signedIn' ? { ...a, expired: true } : { state: 'signedOut' })),
+      ),
+    [],
+  )
 
   const signOut = async () => {
-    const sb = await getSupabase()
-    await sb.auth.signOut()
+    await logout().catch(() => {})
+    setAuth({ state: 'signedOut' })
   }
 
   const langButton = (
@@ -114,14 +109,14 @@ function AuthGate({ onToggleLang }: { onToggleLang: () => void }) {
       type="button"
       onClick={onToggleLang}
       aria-label={t.langToggleLabel}
-      className="fixed end-3 top-3 z-50 inline-flex h-11 items-center gap-1.5 rounded-full bg-surface/80 px-3 text-sm font-semibold text-plum shadow-soft backdrop-blur hover:bg-blush-deep"
+      className="fixed end-3 top-3 z-[70] inline-flex h-11 items-center gap-1.5 rounded-full bg-surface/80 px-3 text-sm font-semibold text-plum shadow-soft backdrop-blur hover:bg-blush-deep"
     >
       <Languages size={16} aria-hidden="true" />
       {t.langToggle}
     </button>
   )
 
-  if (!supabaseConfigured) {
+  if (!apiConfigured) {
     return (
       <main className="grid min-h-svh place-items-center p-6">
         {langButton}
@@ -132,7 +127,7 @@ function AuthGate({ onToggleLang }: { onToggleLang: () => void }) {
     )
   }
 
-  if (session === undefined) {
+  if (auth.state === 'checking') {
     return (
       <main className="grid min-h-svh place-items-center" aria-busy="true">
         <Loader2 size={28} aria-label={t.loading} className="animate-spin text-rose-ink" />
@@ -140,41 +135,32 @@ function AuthGate({ onToggleLang }: { onToggleLang: () => void }) {
     )
   }
 
-  if (!session) {
+  if (auth.state === 'signedOut') {
     return (
-      <>
+      <main className="grid min-h-svh place-items-center bg-blush px-4 py-16">
         {langButton}
-        {error && (
-          <p
-            role="alert"
-            className="fixed inset-x-3 top-16 z-40 mx-auto max-w-md rounded-2xl border border-red-300 bg-red-50 p-3 text-sm font-medium text-red-900"
-          >
-            {t.login.linkError}: {error}
-          </p>
-        )}
-        <Login />
-      </>
-    )
-  }
-
-  if ((session.user.email ?? '').toLowerCase() !== ADMIN_EMAIL) {
-    return (
-      <main className="grid min-h-svh place-items-center p-6">
-        {langButton}
-        <div className="max-w-md rounded-2xl border border-line/15 bg-surface p-6 text-center shadow-soft">
-          <p role="alert" className="font-semibold text-plum">
-            {t.login.notAuthorized}
-          </p>
-          <p className="mt-1 text-sm" dir="ltr">
-            {session.user.email}
-          </p>
-          <button type="button" onClick={() => void signOut()} className="btn-primary mt-5">
-            {t.signOut}
-          </button>
-        </div>
+        <Login onSignedIn={(email) => setAuth({ state: 'signedIn', email, expired: false })} />
       </main>
     )
   }
 
-  return <Dashboard onToggleLang={onToggleLang} onSignOut={signOut} />
+  return (
+    <>
+      <Dashboard onToggleLang={onToggleLang} onSignOut={signOut} />
+      {auth.expired && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={t.login.title}
+          className="fixed inset-0 z-[65] grid place-items-center overflow-y-auto bg-plum/50 px-4 py-16 backdrop-blur-sm"
+        >
+          {langButton}
+          <Login
+            notice={t.login.expired}
+            onSignedIn={(email) => setAuth({ state: 'signedIn', email, expired: false })}
+          />
+        </div>
+      )}
+    </>
+  )
 }
